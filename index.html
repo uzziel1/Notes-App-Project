@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes - App</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="top">
+        <div class="logo">
+          <i class="bx bxl-codepen"></i>
+          <span>Notes App</span>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <div class="user">
+        <img src="Images/default-profile-picture.jpeg" class="user-img" />
+        <div>
+          <p class="bold">Uzziel Gonzalez</p>
+          <p>Admin</p>
+        </div>
+      </div>
+      <div class="searchbar-container">
+        <i class="bx bx-search-alt-2"></i>
+        <input class="searchbar" type="text" placeholder="Search" />
+      </div>
+      <ul>
+        <li>
+          <a href="a">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav-item">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="a">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav-item">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="a">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav-item">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="a">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav-item">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="a">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav-item">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="a">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav-item">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="container">
+        <h1>Welcome Uzziel</h1>
+        <h1>Right Side</h1>
+      </div>
+    </div>
+    <script>
+      let btn = document.querySelector("#btn");
+      let sidebar = document.querySelector(".sidebar");
+
+      btn.onclick = function () {
+        sidebar.classList.toggle("active");
+      };
+    </script>
+  </body>
+</html>
