@@ -89,7 +89,7 @@
 }
 
 .searchbar-container {
-  background-color: rgb(253, 253, 253);
+  background-color: transparent;
   position: relative;
   height: 50px;
   margin: 0.8rem auto;
@@ -103,6 +103,7 @@
 }
 
 .searchbar-container i {
+  margin-left: 5px;
   font-size: 1.3rem;
   color: rgb(100, 100, 100);
 }
@@ -112,6 +113,14 @@
   padding: 0.8rem;
   border: none;
   outline: none;
+  opacity: 0;
+}
+.sidebar.active .searchbar-container {
+  background-color: rgba(253, 253, 253, 0.733);
+}
+
+.sidebar.active .searchbar {
+  opacity: 1;
 }
 .sidebar ul li {
   position: relative;
@@ -171,6 +180,29 @@
   display: none;
 }
 
+.create-new {
+  position: absolute;
+  bottom: 0;
+  list-style-type: none;
+  margin: 0.8rem auto;
+  width: 90%;
+  border-top: 1px solid rgb(183, 183, 183);
+}
+
+.create-folder,
+.create-note {
+  display: flex;
+  align-items: center;
+}
+
+.create-folder i,
+.create-note i {
+  min-width: 50px;
+  text-align: center;
+  height: 50px;
+  border-radius: 12px;
+  line-height: 50px;
+}
 .main-content {
   position: relative;
   min-height: 100vh;
@@ -178,7 +210,7 @@
   left: 80px;
   transition: all 0.5s ease;
   width: calc(100% - 80px);
-  padding: 1rem;
+  padding: 0.8rem;
 }
 
 .container {
