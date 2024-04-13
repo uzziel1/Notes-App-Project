@@ -185,14 +185,23 @@
   bottom: 0;
   list-style-type: none;
   margin: 0.8rem auto;
-  width: 90%;
+  width: 50px;
   border-top: 1px solid rgb(183, 183, 183);
+  cursor: pointer;
+  transition: width 0.5s;
 }
 
 .create-folder,
 .create-note {
   display: flex;
   align-items: center;
+  border-radius: 5px;
+}
+
+.create-folder:hover,
+.create-note:hover {
+  background-color: rgba(142, 142, 142, 0.26);
+  color: rgb(35, 35, 35);
 }
 
 .create-folder i,
@@ -202,6 +211,10 @@
   height: 50px;
   border-radius: 12px;
   line-height: 50px;
+}
+
+.sidebar.active .create-new {
+  width: 90%;
 }
 .main-content {
   position: relative;
