@@ -1,0 +1,145 @@
+.info-container {
+  margin-top: 10px;
+}
+
+.day-info {
+  color: gray;
+  margin-bottom: 5px;
+}
+
+.time-info {
+  color: gray;
+}
+
+.notes {
+  margin-top: 40px;
+}
+
+.notes-list-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  column-gap: 15px;
+  row-gap: 15px;
+  margin-right: 20px;
+}
+
+.notes.active .notes-list-grid {
+  display: none;
+  transition: display 0.5s ease;
+}
+.folder-name {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.note-container {
+  position: relative;
+  background-color: rgb(244, 244, 244);
+  height: 250px;
+  width: 100%;
+  min-width: 250px;
+  border-radius: 15px;
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.note-img-mock {
+  position: absolute;
+  bottom: 20px;
+  top: 60px;
+  left: 30px;
+  right: 30px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 10px;
+  text-indent: 2px;
+  line-height: 5px;
+
+  background-color: white;
+  color: rgb(54, 54, 54);
+  box-shadow: 3px 2px 5px 2px rgba(0, 0, 0, 0.114);
+
+  font-size: 4px;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.note-title {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.note-title i {
+  margin-right: 5px;
+}
+
+.last-edit {
+  position: absolute;
+  background-color: rgb(244, 244, 244);
+  color: rgb(97, 97, 97);
+  height: 40px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-left: 15px;
+  padding-top: 10px;
+  font-size: 14px;
+  z-index: 20;
+  transition: background-color 0.15s ease;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.note-container:hover {
+  background-color: rgb(232, 232, 232);
+}
+
+.note-container:hover .last-edit {
+  background-color: rgb(232, 232, 232);
+}
+@media (max-width: 900px) {
+  .notes-list-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900.1px) and (max-width: 1200px) {
+  .notes-list-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200.1px) and (max-width: 1400px) {
+  .notes-list-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

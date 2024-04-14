@@ -1,16 +1,21 @@
 .header {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 80px;
   right: 0;
   background-color: #f3f3f4;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all 0.5s ease;
+  z-index: 35;
+  box-shadow: 3.2px 1px 3px 2px rgba(0, 0, 0, 0.074);
 }
 
+.header.active {
+  left: 250px;
+}
 .utlity-buttons {
   display: flex;
   justify-content: space-between;
@@ -18,12 +23,54 @@
 }
 
 .header-button {
-  margin-right: 20px;
-  transition: all 6s ease-in-out;
+  margin-right: 30px;
+  transition: all 0.4s ease-in-out;
+  font-size: 17spx;
+}
+
+.line {
+  background-color: transparent;
+  height: 2px;
+  margin-top: 2px;
+  transition: background-color 0.15s;
 }
 
 .header-button:hover .line {
   background-color: rgb(80, 80, 80);
-  height: 2px;
-  margin-top: 2px;
+}
+
+.folder-name {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  justify-content: space-between;
+}
+
+.folder-logo {
+  display: flex;
+}
+
+.folder-name i {
+  margin-right: 10px;
+}
+
+.folder-name p {
+  margin-right: 25px;
+}
+
+.add-down-icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+}
+
+.add-down-icons i {
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.add-down-icons i:hover {
+  background-color: rgb(221, 221, 221);
+  padding: 3px;
+  border-radius: 5px;
 }

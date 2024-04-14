@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header and Sidebar with Shadows</title>
+    <style>
+      .container {
+        position: relative;
+      }
+
+      .header {
+        height: 50px;
+        background-color: #ffffff; /* Adjust as needed */
+        box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5); /* Bottom shadow */
+        z-index: 1; /* Ensure the header is above the sidebar */
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px; /* Adjust width as needed */
+        height: 100%; /* Make sidebar fill the full height */
+        background-color: #ffffff; /* Adjust as needed */
+        box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5); /* Left shadow */
+        z-index: 0; /* Ensure the sidebar is behind the header */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">Header Content</div>
+      <div class="sidebar">Sidebar Content</div>
+    </div>
+  </body>
+</html>
