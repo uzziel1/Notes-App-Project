@@ -15,6 +15,42 @@
   margin-top: 40px;
 }
 
+.folder-name {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  justify-content: space-between;
+}
+
+.folder-logo {
+  display: flex;
+}
+
+.folder-name i {
+  margin-right: 10px;
+}
+
+.folder-name p {
+  margin-right: 25px;
+}
+
+.add-down-icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+}
+
+.add-down-icons i {
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.add-down-icons i:hover {
+  background-color: rgb(221, 221, 221);
+  padding: 3px;
+  border-radius: 5px;
+}
+
 .notes-list-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -23,10 +59,18 @@
   margin-right: 20px;
 }
 
+/*
 .notes.active .notes-list-grid {
   display: none;
   transition: display 0.5s ease;
 }
+*/
+
+.is-hiding-notes {
+  display: none;
+  transition: display 0.5s ease;
+}
+
 .folder-name {
   font-size: 18px;
   margin-bottom: 20px;
@@ -142,4 +186,8 @@
   .notes-list-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+}
+
+.hide-button {
+  display: none;
 }

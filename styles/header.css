@@ -38,39 +38,3 @@
 .header-button:hover .line {
   background-color: rgb(80, 80, 80);
 }
-
-.folder-name {
-  display: flex;
-  align-items: center;
-  width: 300px;
-  justify-content: space-between;
-}
-
-.folder-logo {
-  display: flex;
-}
-
-.folder-name i {
-  margin-right: 10px;
-}
-
-.folder-name p {
-  margin-right: 25px;
-}
-
-.add-down-icons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 10px;
-}
-
-.add-down-icons i {
-  padding: 3px;
-  border-radius: 5px;
-}
-
-.add-down-icons i:hover {
-  background-color: rgb(221, 221, 221);
-  padding: 3px;
-  border-radius: 5px;
-}
