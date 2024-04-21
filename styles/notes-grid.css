@@ -15,6 +15,10 @@
   margin-top: 40px;
 }
 
+.folder {
+  margin-bottom: 40px;
+}
+
 .folder-name {
   display: flex;
   align-items: center;

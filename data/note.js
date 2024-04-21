@@ -1,6 +1,15 @@
-// data/notes.js
+class Note {
+  constructor(noteDetails) {
+    this.id = noteDetails.id;
+    this.name = noteDetails.name;
+    this.content = noteDetails.content;
+    this.lastEdited = noteDetails.lastEdited;
+  }
+}
 
-const notesData = [
+export default Note;
+
+/*  const notes = [
   {
     id: "id1",
     name: "My first note",
@@ -30,6 +39,22 @@ const notesData = [
     fugiat, dolorum eligendi quam cupiditate excepturi mollitia
     maiores labore suscipit quas? Nulla, placeat. Voluptatem quaerat
     non architecto ab laudantium modi minima sunt esse temporibus sint
+    culpa, recusandae aliquam numquam totam ratione voluptas quod
+    exercitationem fuga. Possimus quis earum veniam quasi aliquam
+    eligendi, placeat qui corporis!
+
+    <br />
+    <br />
+    Perspiciatis minima nesciunt dolorem! Officiis iure rerum
+    voluptates a cumque velit quibusdam sed amet tempora. Sit laborum
+    ab, eius fugit doloribus tenetur fugiat, temporibus enim commodi
+    iusto libero magni deleniti quod quam consequuntur! Commodi minima
+    excepturi repudiandae velit hic maxime doloremque. Quaerat
+    provident commodi consectetur veniam similique ad earum omnis
+    ipsum saepe, voluptas, hic voluptates pariatur est explicabo
+    fugiat, dolorum eligendi quam cupiditate excepturi mollitia
+    maiores labore suscipit quas? Nulla, placeat. Voluptatem quaerat
+    non architecto ab laudantium modi minima sunt esse temporibus sint
     culpa.`,
     lastEdited: "April 15, 2024",
   },
@@ -40,6 +65,8 @@ const notesData = [
       "my name is uzziel gonzalez how are you doing to day my lady today today lorem",
     lastEdited: "April 12, 2024",
   },
-];
-
-export default notesData;
+].map((noteDetails) => {
+  return new Note(noteDetails);
+});
+4;
+*/
