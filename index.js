@@ -6,63 +6,13 @@ let btn = document.querySelector("#btn");
 let header = document.querySelector(".header");
 let sidebar = document.querySelector(".sidebar");
 
-let folderDropDownButton = document.querySelectorAll(
-  ".js-folder-dropdown-button"
-);
-
-let folderUpButton = document.querySelectorAll(".js-folder-up-button");
-
 btn.onclick = function () {
   sidebar.classList.toggle("active");
 
   header.classList.toggle("active");
 };
 
-//Maybe Add an Id for each notes ???
-
-//Check the update button js
-
-folderDropDownButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    const folderId = button.dataset.folderId;
-
-    const container = document.querySelector(`.js-notes-grid-${folderId}`);
-
-    container.classList.add("is-hiding-notes");
-  });
-});
-
-folderUpButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    const folderId = button.dataset.folderId;
-
-    const container = document.querySelector(`.js-notes-grid-${folderId}`);
-
-    container.classList.remove("is-hiding-notes");
-  });
-});
-
 //END OF BUTTON FUNCTIONALLITY ^^^^
-/*
-let notesHTML = "";
-
-
-notes.forEach((notes) => {
-  notesHTML += `
-  <div class="note-container">
-  <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
-
-  <div class="note-img-mock">
-    ${notes.content}
-  </div>
-
-  <div class="last-edit">Last edited ${notes.lastEdited}</div>
-</div>
-  `;
-});
-
-document.querySelector(".notes-list-grid").innerHTML = notesHTML;
-*/
 
 const foldersData = [
   {
@@ -92,8 +42,8 @@ const foldersData = [
 ];
 
 const folders = foldersData.map((folderData) => {
-  const { name, notes } = folderData;
-  return new Folder(name, notes);
+  const { name, id, notes } = folderData;
+  return new Folder(name, id, notes);
 });
 
 // Add a new note to Folder 1
@@ -106,15 +56,16 @@ folders[0].addNote({
 
 // Add a new note to Folder 2
 folders[1].addNote({
-  id: "id4",
-  name: "Another note in Folder 2",
-  content: "Content of another note in Folder 2",
+  id: "id1",
+  name: "Another note in Fr 2",
+  content: "Content of ar note in Folder 2",
   lastEdited: "April 16, 2024",
 });
 
+//Renders Folders HTML
 let foldersHTML = "";
 
-foldersData.forEach((folder) => {
+folders.forEach((folder) => {
   let notesHTML = "";
 
   folder.notes.forEach((notes) => {
@@ -139,14 +90,14 @@ foldersData.forEach((folder) => {
       <p>${folder.name}</p>
     </div>
     <div class="add-down-icons">
-      <i class="bx bx-plus"></i>
+      <i class="bx bx-plus js-folder-add-note"></i>
       <i
         class="bx bx-chevron-up folder-dropdown-button js-folder-dropdown-button"
-        data-folder-Id="${folder.id}"
+        data-folder-id="${folder.id}"
       ></i>
       <i
         class="bx bx-chevron-down js-folder-up-button"
-        data-folder-Id="${folder.id}"
+        data-folder-id="${folder.id}"
       ></i>
     </div>
   </div>
@@ -159,6 +110,25 @@ foldersData.forEach((folder) => {
 
 document.querySelector(".notes").innerHTML = foldersHTML;
 
-console.log(folders);
+//Folder Buttons
+const folderDropDownButton = document.querySelectorAll(
+  ".js-folder-dropdown-button"
+);
+const folderUpButton = document.querySelectorAll(".js-folder-up-button");
+const plusButton = document.querySelectorAll(".js-folder-add-note");
 
-console.log(foldersHTML);
+folderDropDownButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    const folderId = button.dataset.folderId;
+    const container = document.querySelector(`.js-notes-grid-${folderId}`);
+    container.classList.add("is-hiding-notes");
+  });
+});
+
+folderUpButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    const folderId = button.dataset.folderId;
+    const container = document.querySelector(`.js-notes-grid-${folderId}`);
+    container.classList.remove("is-hiding-notes");
+  });
+});

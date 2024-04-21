@@ -1,9 +1,10 @@
 // Folder.js
-import Note from "./note.js";
+import Note from "./note-class.js";
 
 class Folder {
-  constructor(name, notes = []) {
+  constructor(name, id, notes = []) {
     this.name = name;
+    this.id = id;
     this.notes = notes.map((noteDetails) => new Note(noteDetails));
   }
 
