@@ -4,34 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header and Sidebar with Shadows</title>
-    <style>
-      .container {
-        position: relative;
-      }
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/sidebar.css" />
+    <link rel="stylesheet" href="styles/notes-grid.css" />
 
-      .header {
-        height: 50px;
-        background-color: #ffffff; /* Adjust as needed */
-        box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5); /* Bottom shadow */
-        z-index: 1; /* Ensure the header is above the sidebar */
-      }
-
-      .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200px; /* Adjust width as needed */
-        height: 100%; /* Make sidebar fill the full height */
-        background-color: #ffffff; /* Adjust as needed */
-        box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5); /* Left shadow */
-        z-index: 0; /* Ensure the sidebar is behind the header */
-      }
-    </style>
+    <style></style>
   </head>
   <body>
-    <div class="container">
-      <div class="header">Header Content</div>
-      <div class="sidebar">Sidebar Content</div>
+    <div class="folder">
+      <div class="folder-name">
+        <div class="folder-logo">
+          <i class="bx bx-folder"></i>
+          <p>${folder.name}</p>
+        </div>
+        <div class="add-down-icons">
+          <i class="bx bx-plus js-folder-add-note"></i>
+
+          <i
+            class="bx bx-chevron-up folder-dropdown-button js-folder-dropdown-button"
+            data-folder-id="${folder.id}"
+          ></i>
+          <i
+            class="bx bx-chevron-down js-folder-up-button"
+            data-folder-id="${folder.id}"
+          ></i>
+        </div>
+      </div>
+      <div class="notes-list-grid js-notes-grid-${folder.id}">
+        <div class="note-container">
+          <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
+
+          <div class="note-img-mock">${notes.content}</div>
+
+          <div class="last-edit">Last edited ${notes.lastEdited}</div>
+        </div>
+      </div>
     </div>
+
+    <script></script>
   </body>
 </html>

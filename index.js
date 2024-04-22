@@ -132,3 +132,19 @@ folderUpButton.forEach((button) => {
     container.classList.remove("is-hiding-notes");
   });
 });
+
+plusButton.forEach((button) => {});
+
+const modal = document.querySelector(".create-new-note");
+const openModal = document.querySelectorAll(".js-folder-add-note");
+const closeModal = document.querySelectorAll(".close-add-note-button");
+
+openModal.forEach((button) => {
+  button.addEventListener("click", () => {
+    modal.showModal();
+  });
+});
+
+closeModal.addEventListener("click", () => {
+  modal.close();
+});
