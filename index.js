@@ -109,9 +109,11 @@ function renderFolderHTML() {
       const folderIndex = findMatchingFolderIndex(folderId);
       const form = document.querySelector(".form");
 
+      // Clear the noteTitle input field
+      document.querySelector(".js-note-title").value = "";
+
       modal.showModal();
 
-      // Define a function to handle form submission
       const handleFormSubmit = () => {
         let noteTitle = document.querySelector(".js-note-title").value;
         folders[folderIndex].addNote({
@@ -123,7 +125,6 @@ function renderFolderHTML() {
         renderFolderHTML();
         noteTitle = "";
 
-        // Remove the event listener after form submission
         form.removeEventListener("submit", handleFormSubmit);
       };
 
