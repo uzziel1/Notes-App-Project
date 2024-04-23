@@ -99,8 +99,6 @@ function renderFolderHTML() {
     });
   });
 
-  plusButton.forEach((button) => {});
-
   const modal = document.querySelector(".create-new-note");
   const openModal = document.querySelectorAll(".js-folder-add-note");
   // const closeModal = document.querySelectorAll(".close-add-note-button");
@@ -109,16 +107,29 @@ function renderFolderHTML() {
     button.addEventListener("click", () => {
       const folderId = button.dataset.folderId;
       const folderIndex = findMatchingFolderIndex(folderId);
-
-      folders[folderIndex].addNote({
-        id: "id3",
-        name: "Test",
-        content: "Content of ar note in Folder 2",
-        lastEdited: "April 22, 2024",
-      });
+      const form = document.querySelector(".form");
 
       modal.showModal();
-      renderFolderHTML();
+
+      // Define a function to handle form submission
+      const handleFormSubmit = () => {
+        let noteTitle = document.querySelector(".js-note-title").value;
+        folders[folderIndex].addNote({
+          id: "id2",
+          name: noteTitle,
+          content: "",
+          lastEdited: "April 22, 2024",
+        });
+        renderFolderHTML();
+        noteTitle = "";
+
+        // Remove the event listener after form submission
+        form.removeEventListener("submit", handleFormSubmit);
+      };
+
+      form.addEventListener("submit", handleFormSubmit);
+
+      console.log(folders[folderIndex]);
     });
   });
 
