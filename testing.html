@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Header and Sidebar with Shadows</title>
+    <title>Testing Notes HTML</title>
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -13,7 +13,56 @@
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/notes-grid.css" />
 
-    <style></style>
+    <style>
+      .folder-name {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .add-down-icons {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 10px;
+      }
+
+      .note-added {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+      }
+      .note-added p {
+        font-size: 15px;
+        width: 12vh;
+        color: green;
+        cursor: default;
+      }
+      .bxs-check-circle {
+        color: green;
+        display: flex;
+      }
+      .bxs-check-circle:hover {
+        color: green;
+      }
+      .delete-button {
+        position: absolute;
+        right: 2.5vh;
+        top: 2.5vh;
+
+        color: rgb(45, 45, 45);
+        display: none;
+        font-size: 18px;
+        transition: color 0.15s, font-size 0.15s;
+      }
+
+      .note-container:hover .delete-button {
+        display: block;
+      }
+
+      .delete-button:hover {
+        color: rgb(255, 47, 0);
+      }
+    </style>
   </head>
   <body>
     <div class="folder">
@@ -34,11 +83,22 @@
             data-folder-id="${folder.id}"
           ></i>
         </div>
+        <div class="note-added">
+          <i class="bx bxs-check-circle"></i>
+          <p>Added note</p>
+        </div>
       </div>
       <div class="notes-list-grid js-notes-grid-${folder.id}">
         <div class="note-container">
           <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
+          <i class="bx bxs-x-circle delete-button"></i>
+          <div class="note-img-mock">${notes.content}</div>
 
+          <div class="last-edit">Last edited ${notes.lastEdited}</div>
+        </div>
+        <div class="note-container">
+          <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
+          <i class="bx bxs-x-circle delete-button"></i>
           <div class="note-img-mock">${notes.content}</div>
 
           <div class="last-edit">Last edited ${notes.lastEdited}</div>
