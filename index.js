@@ -1,6 +1,22 @@
 // import { notes } from "./data/note.js";
 import Folder from "./data/folder.js";
 import { folders, foldersData } from "./data/folder.js";
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
+
+//Updating Clock Element
+const dateElement = document.querySelector(".js-date-info");
+const clockElement = document.querySelector(".js-time-info");
+
+function updateClock() {
+  const currentDate = dayjs().format("MMMM D, YYYY");
+  const currentTime = dayjs().format("hh:mm:ss A");
+
+  dateElement.innerText = currentDate;
+  clockElement.innerText = currentTime;
+}
+
+updateClock();
+const clockIntervalId = setInterval(updateClock, 1000);
 
 //START OF BUTTON FUNCTIONALITY
 let btn = document.querySelector("#btn");
