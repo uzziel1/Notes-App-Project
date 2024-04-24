@@ -16,6 +16,8 @@ btn.onclick = function () {
 //END OF BUTTON FUNCTIONALLITY ^^^^
 
 //Renders Folders HTML
+const hiddenFolders = [];
+
 function renderFolderHTML() {
   let foldersHTML = "";
 
@@ -60,9 +62,9 @@ function renderFolderHTML() {
         </div>
       </div>
       `;
-  });
 
-  document.querySelector(".notes").innerHTML = foldersHTML;
+    document.querySelector(".notes").innerHTML = foldersHTML;
+  });
 
   function findMatchingFolderIndex(folderId) {
     let matchingFolderIndex;
@@ -81,13 +83,18 @@ function renderFolderHTML() {
     ".js-folder-dropdown-button"
   );
   const folderUpButton = document.querySelectorAll(".js-folder-up-button");
-  const plusButton = document.querySelectorAll(".js-folder-add-note");
 
   folderDropDownButton.forEach((button) => {
     button.addEventListener("click", () => {
       const folderId = button.dataset.folderId;
       const container = document.querySelector(`.js-notes-grid-${folderId}`);
       container.classList.add("is-hiding-notes");
+
+      if (!hiddenFolders.includes(folderId)) {
+        hiddenFolders.push(folderId);
+      }
+
+      console.log(hiddenFolders);
     });
   });
 
@@ -96,6 +103,14 @@ function renderFolderHTML() {
       const folderId = button.dataset.folderId;
       const container = document.querySelector(`.js-notes-grid-${folderId}`);
       container.classList.remove("is-hiding-notes");
+
+      if (hiddenFolders.includes(folderId)) {
+        const index = hiddenFolders.indexOf(folderId);
+        console.log(index);
+        hiddenFolders.splice(index, 1);
+      }
+
+      console.log(hiddenFolders);
     });
   });
 
@@ -123,14 +138,13 @@ function renderFolderHTML() {
           lastEdited: "April 22, 2024",
         });
         renderFolderHTML();
+        console.log(hiddenFolders);
         noteTitle = "";
 
         form.removeEventListener("submit", handleFormSubmit);
       };
 
       form.addEventListener("submit", handleFormSubmit);
-
-      console.log(folders[folderIndex]);
     });
   });
 
@@ -139,6 +153,13 @@ function renderFolderHTML() {
     modal.close();
   });
   */
+
+  hiddenFolders.forEach((hiddenFolderId) => {
+    const container = document.querySelector(
+      `.js-notes-grid-${hiddenFolderId}`
+    );
+    container.classList.add("is-hiding-notes");
+  });
 }
 
 renderFolderHTML();
