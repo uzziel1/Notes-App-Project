@@ -1,6 +1,5 @@
 // import { notes } from "./data/note.js";
-import Folder from "./data/folder.js";
-import { folders, foldersData } from "./data/folder.js";
+import { folders } from "./data/folder.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 //Updating Clock Element
@@ -44,7 +43,7 @@ function renderFolderHTML() {
       notesHTML += `
       <div class="note-container">
       <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
-    
+      <i class="bx bxs-x-circle delete-button"></i>
       <div class="note-img-mock">
         ${notes.content}
       </div>
@@ -72,7 +71,12 @@ function renderFolderHTML() {
             data-folder-id="${folder.id}"
           ></i>
         </div>
+        <div class="note-added">
+        <i class="bx bxs-check-circle"></i>
+        <p>Added note</p>
       </div>
+      
+    </div>
       <div class="notes-list-grid js-notes-grid-${folder.id}">
         ${notesHTML}
         </div>

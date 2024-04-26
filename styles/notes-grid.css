@@ -22,8 +22,6 @@
 .folder-name {
   display: flex;
   align-items: center;
-  width: 300px;
-  justify-content: space-between;
 }
 
 .folder-logo {
@@ -249,4 +247,42 @@ body {
 
 .create-new-note i {
   margin-right: 5px;
+}
+
+.note-added {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  display: none;
+}
+.note-added p {
+  font-size: 15px;
+  width: 12vh;
+  color: green;
+  cursor: default;
+}
+.bxs-check-circle {
+  color: green;
+  display: flex;
+}
+.bxs-check-circle:hover {
+  color: green;
+}
+.delete-button {
+  position: absolute;
+  right: 2vh;
+  top: 1.5vh;
+
+  color: rgb(45, 45, 45);
+  display: none;
+  font-size: 18px;
+  transition: color 0.15s, font-size 0.15s;
+}
+
+.note-container:hover .delete-button {
+  display: block;
+}
+
+.delete-button:hover {
+  color: rgb(255, 47, 0);
 }
