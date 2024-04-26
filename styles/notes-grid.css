@@ -250,10 +250,13 @@ body {
 }
 
 .note-added {
-  display: flex;
+  display: none;
   align-items: center;
   padding-left: 20px;
-  display: none;
+}
+
+.note-is-visible {
+  display: flex;
 }
 .note-added p {
   font-size: 15px;

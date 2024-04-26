@@ -30,8 +30,30 @@ btn.onclick = function () {
 
 //END OF BUTTON FUNCTIONALLITY ^^^^
 
+function addClassList() {}
 //Renders Folders HTML
 const hiddenFolders = [];
+
+const addedMessageTimeouts = {};
+
+function updateAddedNote(folderId) {
+  document
+    .querySelector(`.js-note-added-${folderId}`)
+    .classList.add("note-is-visible");
+
+  const previousTimeoutId = addedMessageTimeouts[folderId];
+  if (previousTimeoutId) {
+    clearTimeout(previousTimeoutId);
+  }
+
+  const timeoutId = setTimeout(() => {
+    document
+      .querySelector(`.js-note-added-${folderId}`)
+      .classList.remove("note-is-visible");
+  }, 1500);
+
+  addedMessageTimeouts[folderId] = timeoutId;
+}
 
 function renderFolderHTML() {
   let foldersHTML = "";
@@ -71,7 +93,7 @@ function renderFolderHTML() {
             data-folder-id="${folder.id}"
           ></i>
         </div>
-        <div class="note-added">
+        <div class="note-added js-note-added-${folder.id}" data-folder-id="${folder.id}">
         <i class="bx bxs-check-circle"></i>
         <p>Added note</p>
       </div>
@@ -157,7 +179,9 @@ function renderFolderHTML() {
           content: "",
           lastEdited: "April 22, 2024",
         });
+
         renderFolderHTML();
+        updateAddedNote(folderId);
         console.log(hiddenFolders);
         noteTitle = "";
 
