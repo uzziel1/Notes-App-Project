@@ -1,5 +1,5 @@
 // import { notes } from "./data/note.js";
-import { folders } from "./data/folder.js";
+import { folders, deleteNote } from "./data/folder.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 //Updating Clock Element
@@ -55,7 +55,7 @@ function updateAddedNote(folderId) {
   addedMessageTimeouts[folderId] = timeoutId;
 }
 
-function renderFolderHTML() {
+export function renderFolderHTML() {
   let foldersHTML = "";
 
   folders.forEach((folder) => {
@@ -65,7 +65,7 @@ function renderFolderHTML() {
       notesHTML += `
       <div class="note-container">
       <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
-      <i class="bx bxs-x-circle delete-button"></i>
+      <i class="bx bxs-x-circle delete-button js-delete-button" data-note-id = "${notes.id}" data-folder-id = "${folder.id}"></i>
       <div class="note-img-mock">
         ${notes.content}
       </div>
@@ -135,8 +135,6 @@ function renderFolderHTML() {
       if (!hiddenFolders.includes(folderId)) {
         hiddenFolders.push(folderId);
       }
-
-      console.log(hiddenFolders);
     });
   });
 
@@ -148,12 +146,40 @@ function renderFolderHTML() {
 
       if (hiddenFolders.includes(folderId)) {
         const index = hiddenFolders.indexOf(folderId);
-        console.log(index);
+
         hiddenFolders.splice(index, 1);
       }
-
-      console.log(hiddenFolders);
     });
+  });
+
+  //Delete button
+  function attachDeleteButtonListeners() {
+    const deleteButtons = document.querySelectorAll(".js-delete-button");
+    deleteButtons.forEach((button) => {
+      button.removeEventListener("click", handleDeleteButtonClick);
+      button.addEventListener("click", handleDeleteButtonClick);
+    });
+  }
+
+  function handleDeleteButtonClick(event) {
+    const button = event.target;
+    const folderId = button.dataset.folderId;
+    const noteId = button.dataset.noteId;
+
+    folders.forEach((folder) => {
+      if (folder.id === folderId) {
+        folder.notes.forEach((note, index) => {
+          if (note.id === noteId) {
+            console.log(`noteId: ${noteId}, noteIndex: ${index}`);
+          }
+        });
+      }
+    });
+  }
+
+  // Attach event listeners when the DOM is ready
+  document.addEventListener("DOMContentLoaded", function () {
+    attachDeleteButtonListeners();
   });
 
   const modal = document.querySelector(".create-new-note");
@@ -174,15 +200,14 @@ function renderFolderHTML() {
       const handleFormSubmit = () => {
         let noteTitle = document.querySelector(".js-note-title").value;
         folders[folderIndex].addNote({
-          id: "id2",
+          id: Math.random(),
           name: noteTitle,
           content: "",
           lastEdited: "April 22, 2024",
         });
 
-        renderFolderHTML();
         updateAddedNote(folderId);
-        console.log(hiddenFolders);
+        console.log(folders);
         noteTitle = "";
 
         form.removeEventListener("submit", handleFormSubmit);
@@ -207,3 +232,31 @@ function renderFolderHTML() {
 }
 
 renderFolderHTML();
+
+/*
+// Check if the ID is already stored in local storage
+let id = localStorage.getItem("generatedId");
+
+// If the ID is not stored, generate it and save it in local storage
+if (!id) {
+  id = `id${Date.now()}`; // Generate the current time in milliseconds
+  localStorage.setItem("generatedId", id); // Save the ID in local storage
+}
+
+// Use the ID variable as needed
+console.log("Generated ID:", id);
+console.log(id);
+console.log(`id${Date.now()}`);
+
+folders[0].notes.forEach((note, index) => {
+  if (note.id === "id1") {
+    console.log("found Id1");
+    console.log(index);
+  } else if (note.id === "id2") {
+    console.log("foundId2");
+    console.log(index);
+  } else if (note.id !== "id3") {
+  }
+});
+
+*/

@@ -1,5 +1,6 @@
 // Folder.js
 import Note from "./note-class.js";
+import { renderFolderHTML } from "../index.js";
 
 class Folder {
   constructor(name, id, notes = []) {
@@ -11,10 +12,24 @@ class Folder {
   addNote(noteDetails) {
     const newNote = new Note(noteDetails);
     this.notes.push(newNote);
+    renderFolderHTML();
   }
 }
 
-export const foldersData = [
+export function deleteNote(folderId, noteId) {
+  const matchingFolder = folders.find((folder) => folder.id === folderId);
+
+  if (!matchingFolder) {
+    console.error("Folder not found");
+    return;
+  }
+
+  matchingFolder.notes = matchingFolder.notes.filter(
+    (note) => note.id !== noteId
+  );
+}
+
+let foldersData = [
   {
     name: "Folder 1",
     id: "folderId1",
@@ -25,6 +40,12 @@ export const foldersData = [
         content: "Content of first note in Folder 1",
         lastEdited: "April 15, 2024",
       },
+      {
+        id: "id2",
+        name: "second test note",
+        content: "Content of first note in Folder 1",
+        lastEdited: "April 27, 2024",
+      },
     ],
   },
   {
@@ -32,7 +53,7 @@ export const foldersData = [
     id: "folderId2",
     notes: [
       {
-        id: "id2",
+        id: "id3",
         name: "My first note in Folder 2",
         content: "Content of first note in Folder 2",
         lastEdited: "April 11, 2024",
