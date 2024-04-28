@@ -1,5 +1,5 @@
 // import { notes } from "./data/note.js";
-import { folders, deleteNote } from "./data/folder.js";
+import { folders } from "./data/folder.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 //Updating Clock Element
@@ -37,6 +37,7 @@ const hiddenFolders = [];
 const addedMessageTimeouts = {};
 
 function updateAddedNote(folderId) {
+  renderFolderHTML();
   document
     .querySelector(`.js-note-added-${folderId}`)
     .classList.add("note-is-visible");
@@ -58,7 +59,7 @@ function updateAddedNote(folderId) {
 export function renderFolderHTML() {
   let foldersHTML = "";
 
-  folders.forEach((folder) => {
+  folders.folderData.forEach((folder) => {
     let notesHTML = "";
 
     folder.notes.forEach((notes) => {
@@ -111,7 +112,7 @@ export function renderFolderHTML() {
   function findMatchingFolderIndex(folderId) {
     let matchingFolderIndex;
 
-    folders.forEach((folder, index) => {
+    folders.folderData.forEach((folder, index) => {
       if (folder.id === folderId) {
         matchingFolderIndex = index;
       }
@@ -152,36 +153,6 @@ export function renderFolderHTML() {
     });
   });
 
-  //Delete button
-  function attachDeleteButtonListeners() {
-    const deleteButtons = document.querySelectorAll(".js-delete-button");
-    deleteButtons.forEach((button) => {
-      button.removeEventListener("click", handleDeleteButtonClick);
-      button.addEventListener("click", handleDeleteButtonClick);
-    });
-  }
-
-  function handleDeleteButtonClick(event) {
-    const button = event.target;
-    const folderId = button.dataset.folderId;
-    const noteId = button.dataset.noteId;
-
-    folders.forEach((folder) => {
-      if (folder.id === folderId) {
-        folder.notes.forEach((note, index) => {
-          if (note.id === noteId) {
-            console.log(`noteId: ${noteId}, noteIndex: ${index}`);
-          }
-        });
-      }
-    });
-  }
-
-  // Attach event listeners when the DOM is ready
-  document.addEventListener("DOMContentLoaded", function () {
-    attachDeleteButtonListeners();
-  });
-
   const modal = document.querySelector(".create-new-note");
   const openModal = document.querySelectorAll(".js-folder-add-note");
   // const closeModal = document.querySelectorAll(".close-add-note-button");
@@ -199,17 +170,19 @@ export function renderFolderHTML() {
 
       const handleFormSubmit = () => {
         let noteTitle = document.querySelector(".js-note-title").value;
-        folders[folderIndex].addNote({
-          id: Math.random(),
-          name: noteTitle,
-          content: "",
-          lastEdited: "April 22, 2024",
-        });
+        folders.addNoteToFolder(
+          {
+            id: Math.random(),
+            name: noteTitle,
+            content: "",
+            lastEdited: "April 22, 2024",
+          },
+          folderId
+        );
 
         updateAddedNote(folderId);
         console.log(folders);
         noteTitle = "";
-
         form.removeEventListener("submit", handleFormSubmit);
       };
 
@@ -260,3 +233,26 @@ folders[0].notes.forEach((note, index) => {
 });
 
 */
+
+//Delete button
+function attachDeleteButtonListeners() {
+  const deleteButtons = document.querySelectorAll(".js-delete-button");
+  deleteButtons.forEach((button) => {
+    button.removeEventListener("click", handleDeleteButtonClick);
+    button.addEventListener("click", handleDeleteButtonClick);
+  });
+}
+
+function handleDeleteButtonClick(event) {
+  const button = event.target;
+  const folderId = button.dataset.folderId;
+  const noteId = button.dataset.noteId;
+
+  folders.deleteNoteFromFolder(folderId, noteId);
+  renderFolderHTML();
+}
+
+// Attach event listeners when the DOM is ready
+document.addEventListener("DOMContentLoaded", function () {
+  attachDeleteButtonListeners();
+});

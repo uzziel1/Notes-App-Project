@@ -1,7 +1,7 @@
 // Folder.js
 import Note from "./note-class.js";
-import { renderFolderHTML } from "../index.js";
 
+/* 
 class Folder {
   constructor(name, id, notes = []) {
     this.name = name;
@@ -12,6 +12,7 @@ class Folder {
   addNote(noteDetails) {
     const newNote = new Note(noteDetails);
     this.notes.push(newNote);
+    //note
     renderFolderHTML();
   }
 }
@@ -29,7 +30,7 @@ export function deleteNote(folderId, noteId) {
   );
 }
 
-let foldersData = [
+export let foldersData = [
   {
     name: "Folder 1",
     id: "folderId1",
@@ -68,3 +69,87 @@ export const folders = foldersData.map((folderData) => {
 });
 
 export default Folder;
+
+*/
+
+class Folder {
+  folderData = [
+    {
+      name: "folder1",
+      id: "folderId1",
+      notes: [
+        {
+          id: "id1",
+          name: "My first note in Folder 1",
+          content: "Content of first note in Folder 1",
+          lastEdited: "April 15, 2024",
+        },
+        {
+          id: "id2",
+          name: "second test note",
+          content: "Content of first note in Folder 1",
+          lastEdited: "April 27, 2024",
+        },
+      ],
+    },
+    {
+      name: "folder2",
+      id: "folderId2",
+      notes: [
+        {
+          id: "id3",
+          name: "My first note in Folder 2",
+          content: "Content of first note in Folder 2",
+          lastEdited: "April 11, 2024",
+        },
+      ],
+    },
+  ];
+  addNoteToFolder(noteDetails, folderId) {
+    const newNote = new Note(noteDetails);
+    let matchingFolderIndex = -1;
+    this.folderData.forEach((folder, index) => {
+      if (folder.id === folderId) {
+        matchingFolderIndex = index;
+        console.log(matchingFolderIndex);
+      }
+    });
+    if (matchingFolderIndex !== -1) {
+      // Ensure the 'notes' property exists before pushing the new note
+      if (!this.folderData[matchingFolderIndex].notes) {
+        this.folderData[matchingFolderIndex].notes = [];
+      }
+      this.folderData[matchingFolderIndex].notes.push(newNote);
+    }
+  }
+
+  deleteNoteFromFolder(folderId, noteId) {
+    let matchingFolder = -1;
+    let matchingNoteIndex;
+
+    this.folderData.forEach((folder) => {
+      if (folder.id === folderId) {
+        matchingFolder = folder;
+      }
+    });
+
+    matchingFolder.notes.forEach((note, index) => {
+      if (note.id === noteId) {
+        matchingNoteIndex = index;
+      }
+    });
+
+    matchingFolder.notes.splice(matchingNoteIndex, 1);
+    console.log(this);
+  }
+
+  addNewFolder(folderName) {
+    this.folderData.push({
+      name: folderName,
+      id: Math.random(),
+      notes: [],
+    });
+    console.log(this);
+  }
+}
+export const folders = new Folder();
