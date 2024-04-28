@@ -73,38 +73,59 @@ export default Folder;
 */
 
 class Folder {
-  folderData = [
-    {
-      name: "folder1",
-      id: "folderId1",
-      notes: [
+  #localStorageKey; // Private Property
+
+  constructor(localStorageKey) {
+    this.#localStorageKey = this.#localStorageKey;
+    this.#loadFromStorage();
+  }
+
+  #loadFromStorage() {
+    this.folderData = JSON.parse(localStorage.getItem(this.#localStorageKey));
+
+    if (!this.folderData) {
+      this.folderData = [
         {
-          id: "id1",
-          name: "My first note in Folder 1",
-          content: "Content of first note in Folder 1",
-          lastEdited: "April 15, 2024",
+          name: "Default Folder1",
+          id: "DefaultFolderId1",
+          notes: [
+            {
+              id: "DefaultNoteId1",
+              name: "My first note in Folder 1",
+              content: "Content of first note in Folder 1",
+              lastEdited: "April 15, 2024",
+            },
+            {
+              id: "DefaultNoteId2",
+              name: "My second note in Folder 1",
+              content: "Content of second note in Folder 1",
+              lastEdited: "April 27, 2024",
+            },
+          ],
         },
         {
-          id: "id2",
-          name: "second test note",
-          content: "Content of first note in Folder 1",
-          lastEdited: "April 27, 2024",
+          name: "Default Folder 2",
+          id: "DefaultFolderId2",
+          notes: [
+            {
+              id: "DefaultNoteId3",
+              name: "My first note in Folder 2",
+              content: "Content of first note in Folder 2",
+              lastEdited: "April 11, 2024",
+            },
+          ],
         },
-      ],
-    },
-    {
-      name: "folder2",
-      id: "folderId2",
-      notes: [
-        {
-          id: "id3",
-          name: "My first note in Folder 2",
-          content: "Content of first note in Folder 2",
-          lastEdited: "April 11, 2024",
-        },
-      ],
-    },
-  ];
+      ];
+    }
+  }
+
+  saveToStorage() {
+    localStorage.setItem(
+      this.#localStorageKey,
+      JSON.stringify(this.folderData)
+    );
+  }
+
   addNoteToFolder(noteDetails, folderId) {
     const newNote = new Note(noteDetails);
     let matchingFolderIndex = -1;
@@ -121,6 +142,8 @@ class Folder {
       }
       this.folderData[matchingFolderIndex].notes.push(newNote);
     }
+
+    this.saveToStorage();
   }
 
   deleteNoteFromFolder(folderId, noteId) {
@@ -149,15 +172,18 @@ class Folder {
     } else {
       console.error("Note not found in folder:", noteId);
     }
+
+    this.saveToStorage();
   }
 
   addNewFolder(folderName) {
     this.folderData.push({
       name: folderName,
-      id: Math.random(),
+      id: `folderId${Date.now()}`,
       notes: [],
     });
-    console.log(this);
+
+    this.saveToStorage();
   }
 }
-export const folders = new Folder();
+export const folders = new Folder("main-folders");
