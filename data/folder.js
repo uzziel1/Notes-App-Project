@@ -124,23 +124,31 @@ class Folder {
   }
 
   deleteNoteFromFolder(folderId, noteId) {
-    let matchingFolder = -1;
-    let matchingNoteIndex;
+    let matchingFolder = null;
+    let matchingNoteIndex = -1;
 
+    // Find the matching folder
     this.folderData.forEach((folder) => {
       if (folder.id === folderId) {
         matchingFolder = folder;
       }
     });
 
-    matchingFolder.notes.forEach((note, index) => {
-      if (note.id === noteId) {
-        matchingNoteIndex = index;
-      }
-    });
+    // If the folder is found, find the matching note within the folder
+    if (matchingFolder) {
+      matchingFolder.notes.forEach((note, index) => {
+        if (note.id === noteId) {
+          matchingNoteIndex = index;
+        }
+      });
+    }
 
-    matchingFolder.notes.splice(matchingNoteIndex, 1);
-    console.log(this);
+    // If the note is found, delete it from the folder's notes array
+    if (matchingNoteIndex !== -1) {
+      matchingFolder.notes.splice(matchingNoteIndex, 1);
+    } else {
+      console.error("Note not found in folder:", noteId);
+    }
   }
 
   addNewFolder(folderName) {

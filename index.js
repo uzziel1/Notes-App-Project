@@ -30,32 +30,9 @@ btn.onclick = function () {
 
 //END OF BUTTON FUNCTIONALLITY ^^^^
 
-function addClassList() {}
 //Renders Folders HTML
 const hiddenFolders = [];
-
 const addedMessageTimeouts = {};
-
-function updateAddedNote(folderId) {
-  renderFolderHTML();
-  document
-    .querySelector(`.js-note-added-${folderId}`)
-    .classList.add("note-is-visible");
-
-  const previousTimeoutId = addedMessageTimeouts[folderId];
-  if (previousTimeoutId) {
-    clearTimeout(previousTimeoutId);
-  }
-
-  const timeoutId = setTimeout(() => {
-    document
-      .querySelector(`.js-note-added-${folderId}`)
-      .classList.remove("note-is-visible");
-  }, 1500);
-
-  addedMessageTimeouts[folderId] = timeoutId;
-}
-
 export function renderFolderHTML() {
   let foldersHTML = "";
 
@@ -109,100 +86,131 @@ export function renderFolderHTML() {
     document.querySelector(".notes").innerHTML = foldersHTML;
   });
 
-  function findMatchingFolderIndex(folderId) {
-    let matchingFolderIndex;
+  attachDeleteButtonListeners();
 
-    folders.folderData.forEach((folder, index) => {
-      if (folder.id === folderId) {
-        matchingFolderIndex = index;
-      }
-    });
+  attachCreateNewNoteButtonListeners();
+}
 
-    return matchingFolderIndex;
-  }
-
-  //Folder Buttons
-  const folderDropDownButton = document.querySelectorAll(
-    ".js-folder-dropdown-button"
-  );
-  const folderUpButton = document.querySelectorAll(".js-folder-up-button");
-
-  folderDropDownButton.forEach((button) => {
-    button.addEventListener("click", () => {
-      const folderId = button.dataset.folderId;
-      const container = document.querySelector(`.js-notes-grid-${folderId}`);
-      container.classList.add("is-hiding-notes");
-
-      if (!hiddenFolders.includes(folderId)) {
-        hiddenFolders.push(folderId);
-      }
-    });
-  });
-
-  folderUpButton.forEach((button) => {
-    button.addEventListener("click", () => {
-      const folderId = button.dataset.folderId;
-      const container = document.querySelector(`.js-notes-grid-${folderId}`);
-      container.classList.remove("is-hiding-notes");
-
-      if (hiddenFolders.includes(folderId)) {
-        const index = hiddenFolders.indexOf(folderId);
-
-        hiddenFolders.splice(index, 1);
-      }
-    });
-  });
-
-  const modal = document.querySelector(".create-new-note");
-  const openModal = document.querySelectorAll(".js-folder-add-note");
-  // const closeModal = document.querySelectorAll(".close-add-note-button");
-
-  openModal.forEach((button) => {
-    button.addEventListener("click", () => {
-      const folderId = button.dataset.folderId;
-      const folderIndex = findMatchingFolderIndex(folderId);
-      const form = document.querySelector(".form");
-
-      // Clear the noteTitle input field
-      document.querySelector(".js-note-title").value = "";
-
-      modal.showModal();
-
-      const handleFormSubmit = () => {
-        let noteTitle = document.querySelector(".js-note-title").value;
-        folders.addNoteToFolder(
-          {
-            id: Math.random(),
-            name: noteTitle,
-            content: "",
-            lastEdited: "April 22, 2024",
-          },
-          folderId
-        );
-
-        updateAddedNote(folderId);
-        console.log(folders);
-        noteTitle = "";
-        form.removeEventListener("submit", handleFormSubmit);
-      };
-
-      form.addEventListener("submit", handleFormSubmit);
-    });
-  });
-
-  /*
-  closeModal.addEventListener("click", () => {
-    modal.close();
-  });
-  */
-
-  hiddenFolders.forEach((hiddenFolderId) => {
-    const container = document.querySelector(
-      `.js-notes-grid-${hiddenFolderId}`
-    );
-    container.classList.add("is-hiding-notes");
+//Delete button
+function attachDeleteButtonListeners() {
+  const deleteButtons = document.querySelectorAll(".js-delete-button");
+  deleteButtons.forEach((button) => {
+    button.removeEventListener("click", handleDeleteButtonClick);
+    button.addEventListener("click", handleDeleteButtonClick);
   });
 }
+
+function handleDeleteButtonClick(event) {
+  const button = event.target;
+  const folderId = button.dataset.folderId;
+  const noteId = button.dataset.noteId;
+
+  folders.deleteNoteFromFolder(folderId, noteId);
+  renderFolderHTML();
+}
+
+// Attach event listeners when the DOM is ready
+document.addEventListener("DOMContentLoaded", function () {
+  attachDeleteButtonListeners();
+});
+function attachCreateNewNoteButtonListeners() {
+  const openModals = document.querySelectorAll(".js-folder-add-note");
+  openModals.forEach((button) => {
+    button.addEventListener("click", handleNewNoteButtonClick);
+  });
+}
+
+function handleNewNoteButtonClick(event) {
+  const button = event.target;
+  const folderId = button.dataset.folderId;
+  const form = document.querySelector(".form");
+  const modal = document.querySelector(".create-new-note");
+
+  // Clear the noteTitle input field
+  document.querySelector(".js-note-title").value = "";
+
+  modal.showModal();
+
+  const handleFormSubmit = () => {
+    let noteTitle = document.querySelector(".js-note-title").value;
+    folders.addNoteToFolder(
+      {
+        id: `id${Date.now()}`,
+        name: noteTitle,
+        content: "",
+        lastEdited: "April 22, 2024",
+      },
+      folderId
+    );
+
+    renderFolderHTML();
+    updateAddedNote(folderId);
+    noteTitle = "";
+    form.removeEventListener("submit", handleFormSubmit);
+  };
+
+  form.addEventListener("submit", handleFormSubmit);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  attachCreateNewNoteButtonListeners();
+});
+
+function updateAddedNote(folderId) {
+  document
+    .querySelector(`.js-note-added-${folderId}`)
+    .classList.add("note-is-visible");
+
+  const previousTimeoutId = addedMessageTimeouts[folderId];
+  if (previousTimeoutId) {
+    clearTimeout(previousTimeoutId);
+  }
+
+  const timeoutId = setTimeout(() => {
+    document
+      .querySelector(`.js-note-added-${folderId}`)
+      .classList.remove("note-is-visible");
+  }, 1500);
+
+  addedMessageTimeouts[folderId] = timeoutId;
+}
+
+//Folder Buttons
+const folderDropDownButton = document.querySelectorAll(
+  ".js-folder-dropdown-button"
+);
+const folderUpButton = document.querySelectorAll(".js-folder-up-button");
+
+folderDropDownButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    const folderId = button.dataset.folderId;
+    const container = document.querySelector(`.js-notes-grid-${folderId}`);
+    container.classList.add("is-hiding-notes");
+
+    if (!hiddenFolders.includes(folderId)) {
+      hiddenFolders.push(folderId);
+    }
+  });
+});
+
+folderUpButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    const folderId = button.dataset.folderId;
+    const container = document.querySelector(`.js-notes-grid-${folderId}`);
+    container.classList.remove("is-hiding-notes");
+
+    if (hiddenFolders.includes(folderId)) {
+      const index = hiddenFolders.indexOf(folderId);
+
+      hiddenFolders.splice(index, 1);
+    }
+  });
+});
+
+hiddenFolders.forEach((hiddenFolderId) => {
+  const container = document.querySelector(`.js-notes-grid-${hiddenFolderId}`);
+  container.classList.add("is-hiding-notes");
+});
 
 renderFolderHTML();
 
@@ -233,26 +241,3 @@ folders[0].notes.forEach((note, index) => {
 });
 
 */
-
-//Delete button
-function attachDeleteButtonListeners() {
-  const deleteButtons = document.querySelectorAll(".js-delete-button");
-  deleteButtons.forEach((button) => {
-    button.removeEventListener("click", handleDeleteButtonClick);
-    button.addEventListener("click", handleDeleteButtonClick);
-  });
-}
-
-function handleDeleteButtonClick(event) {
-  const button = event.target;
-  const folderId = button.dataset.folderId;
-  const noteId = button.dataset.noteId;
-
-  folders.deleteNoteFromFolder(folderId, noteId);
-  renderFolderHTML();
-}
-
-// Attach event listeners when the DOM is ready
-document.addEventListener("DOMContentLoaded", function () {
-  attachDeleteButtonListeners();
-});
