@@ -86,8 +86,47 @@ export function renderFolderHTML() {
     document.querySelector(".notes").innerHTML = foldersHTML;
   });
 
-  attachDeleteButtonListeners();
+  //Folder Buttons
+  const folderDropDownButton = document.querySelectorAll(
+    ".js-folder-dropdown-button"
+  );
+  const folderUpButton = document.querySelectorAll(".js-folder-up-button");
 
+  folderDropDownButton.forEach((button) => {
+    button.addEventListener("click", () => {
+      const folderId = button.dataset.folderId;
+      const container = document.querySelector(`.js-notes-grid-${folderId}`);
+      container.classList.add("is-hiding-notes");
+
+      if (!hiddenFolders.includes(folderId)) {
+        hiddenFolders.push(folderId);
+      }
+    });
+  });
+
+  folderUpButton.forEach((button) => {
+    button.addEventListener("click", () => {
+      const folderId = button.dataset.folderId;
+      const container = document.querySelector(`.js-notes-grid-${folderId}`);
+      container.classList.remove("is-hiding-notes");
+
+      if (hiddenFolders.includes(folderId)) {
+        const index = hiddenFolders.indexOf(folderId);
+
+        hiddenFolders.splice(index, 1);
+        console.log("succesful");
+      }
+    });
+  });
+
+  hiddenFolders.forEach((hiddenFolderId) => {
+    const container = document.querySelector(
+      `.js-notes-grid-${hiddenFolderId}`
+    );
+    container.classList.add("is-hiding-notes");
+  });
+
+  attachDeleteButtonListeners();
   attachCreateNewNoteButtonListeners();
 }
 
@@ -174,43 +213,6 @@ function updateAddedNote(folderId) {
 
   addedMessageTimeouts[folderId] = timeoutId;
 }
-
-//Folder Buttons
-const folderDropDownButton = document.querySelectorAll(
-  ".js-folder-dropdown-button"
-);
-const folderUpButton = document.querySelectorAll(".js-folder-up-button");
-
-folderDropDownButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    const folderId = button.dataset.folderId;
-    const container = document.querySelector(`.js-notes-grid-${folderId}`);
-    container.classList.add("is-hiding-notes");
-
-    if (!hiddenFolders.includes(folderId)) {
-      hiddenFolders.push(folderId);
-    }
-  });
-});
-
-folderUpButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    const folderId = button.dataset.folderId;
-    const container = document.querySelector(`.js-notes-grid-${folderId}`);
-    container.classList.remove("is-hiding-notes");
-
-    if (hiddenFolders.includes(folderId)) {
-      const index = hiddenFolders.indexOf(folderId);
-
-      hiddenFolders.splice(index, 1);
-    }
-  });
-});
-
-hiddenFolders.forEach((hiddenFolderId) => {
-  const container = document.querySelector(`.js-notes-grid-${hiddenFolderId}`);
-  container.classList.add("is-hiding-notes");
-});
 
 renderFolderHTML();
 
