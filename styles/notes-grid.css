@@ -26,6 +26,18 @@
 
 .folder-logo {
   display: flex;
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.15s;
+}
+
+.folder-logo p {
+  cursor: pointer;
+}
+
+.folder-logo:hover {
+  background-color: rgb(212, 212, 212);
+  border-radius: 5px;
 }
 
 .folder-name i {

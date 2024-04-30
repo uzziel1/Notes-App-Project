@@ -214,6 +214,7 @@ function updateAddedNote(folderId) {
   addedMessageTimeouts[folderId] = timeoutId;
 }
 
+//Create New folder Sidebar Button
 document.querySelector(".js-create-folder").addEventListener("click", () => {
   const form = document.querySelector(".js-folder-title-form");
   const modal = document.querySelector(".js-create-new-folder");
