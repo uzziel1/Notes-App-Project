@@ -214,6 +214,28 @@ function updateAddedNote(folderId) {
   addedMessageTimeouts[folderId] = timeoutId;
 }
 
+document.querySelector(".js-create-folder").addEventListener("click", () => {
+  const form = document.querySelector(".js-folder-title-form");
+  const modal = document.querySelector(".js-create-new-folder");
+
+  // Clear the noteTitle input field
+  document.querySelector(".js-new-folder-title").value = "";
+
+  modal.showModal();
+
+  const handleFormSubmit = () => {
+    let folderTitle = document.querySelector(".js-new-folder-title").value;
+    folders.addNewFolder(folderTitle);
+
+    renderFolderHTML();
+
+    folderTitle = "";
+    form.removeEventListener("submit", handleFormSubmit);
+  };
+
+  form.addEventListener("submit", handleFormSubmit);
+});
+
 renderFolderHTML();
 
 /*
