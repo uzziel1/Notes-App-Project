@@ -269,3 +269,4 @@ folders[0].notes.forEach((note, index) => {
 
 //Diff
 //second diff
+// new
