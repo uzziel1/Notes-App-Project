@@ -177,7 +177,7 @@ function handleNewNoteButtonClick(event) {
         id: `id${Date.now()}`,
         name: noteTitle,
         content: "",
-        lastEdited: "April 22, 2024",
+        lastEdited: `${dayjs().format("MMMM D, YYYY")}`,
       },
       folderId
     );
