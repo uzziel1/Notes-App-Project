@@ -56,7 +56,7 @@ export function renderFolderHTML() {
     foldersHTML += `
       <div class="folder">
       <div class="folder-name">
-        <div class="folder-logo">
+        <div class="folder-logo js-folder-info-button" data-folder-id = "${folder.id}">
           <i class="bx bx-folder"></i>
           <p>${folder.name}</p>
         </div>
@@ -124,6 +124,14 @@ export function renderFolderHTML() {
       `.js-notes-grid-${hiddenFolderId}`
     );
     container.classList.add("is-hiding-notes");
+  });
+
+  //Folder info button
+  document.querySelectorAll(".js-folder-info-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const folderId = button.dataset.folderId;
+      console.log(folderId);
+    });
   });
 
   attachDeleteButtonListeners();
