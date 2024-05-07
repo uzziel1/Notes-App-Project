@@ -62,6 +62,132 @@
       .delete-button:hover {
         color: rgb(255, 47, 0);
       }
+
+      .left-folder-info {
+        position: fixed;
+        background-color: rgb(232, 232, 232);
+        top: 0;
+        right: 0;
+        width: 75vh;
+        height: 100%;
+      }
+      .folder-info-buttons {
+        position: relative;
+        display: flex;
+        top: 0;
+        right: 0;
+        height: 30px;
+        background-color: rgb(217, 217, 217);
+      }
+      .folder-info-data {
+        position: relative;
+
+        height: 270px;
+        top: 0;
+        right: 0;
+      }
+
+      .folder-info-name {
+        position: relative;
+        border-bottom-width: 1px;
+        border-bottom-color: black;
+
+        top: 3vh;
+        right: 0;
+        color: rgb(0, 0, 0);
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        padding-left: 3vh;
+        margin-bottom: 5px;
+      }
+      .date-created {
+        position: relative;
+        display: flex;
+        align-items: center;
+        top: 3vh;
+        right: 0;
+        height: 3vh;
+
+        color: rgb(95, 95, 95);
+
+        padding-left: 3vh;
+      }
+      .unnamed-div1 {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        top: 3vh;
+        right: 0;
+        height: 3vh;
+        color: rgb(95, 95, 95);
+
+        padding-left: 3vh;
+      }
+      .unnamed-div2 {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        top: 3vh;
+        right: 0;
+        height: 3vh;
+        color: rgb(95, 95, 95);
+
+        padding-left: 3vh;
+      }
+      .folder-description {
+        position: relative;
+        background-color: rgb(245, 245, 245);
+        border-radius: 10px;
+        padding-top: 0;
+        padding-left: 3vh;
+        top: 6vh;
+        height: 8vh;
+        width: 92.5%;
+        margin-left: 3vh;
+        border: none;
+        outline: none;
+      }
+
+      .folder-info-notes-container {
+        top: 0;
+        height: 100%;
+        padding-bottom: 20px; /* Add padding to the bottom */
+        overflow-y: auto;
+      }
+      .folder-info-notes-container p {
+        color: rgb(80, 80, 80);
+        margin-left: 3vh;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .folder-info-notes-grid {
+        align-items: flex-start; /* Align items at the start of the container */
+        padding: 10px; /* Add padding to prevent containers from sticking to the edges */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+        row-gap: 10px;
+        padding-bottom: 60%;
+        overflow: visible; /* Hide overflowing content */
+      }
+
+      .folder-info-notes-grid .note-container {
+        min-height: 100px;
+        overflow: visible;
+      }
+      .line-seperator {
+        position: relative;
+        background-color: rgb(193, 193, 193);
+        top: 0;
+        right: 3vh;
+        left: 3vh;
+        height: 1px;
+        margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
@@ -102,6 +228,112 @@
           <div class="note-img-mock">${notes.content}</div>
 
           <div class="last-edit">Last edited ${notes.lastEdited}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-folder-info">
+      <div class="folder-info-buttons"></div>
+      <div class="folder-info-data">
+        <div class="folder-info-name">
+          <i class="bx bx-folder"></i>
+          Folder 1
+        </div>
+        <div class="date-created">
+          <i class="bx bx-calendar"></i>
+          Date Created: May 7th 2024
+        </div>
+        <div class="unnamed-div1">
+          <i class="bx bx-notepad"></i>
+          Note Count: 3
+        </div>
+        <div class="unnamed-div2">
+          <i class="bx bx-purchase-tag-alt"></i>
+          Tags
+        </div>
+        <input
+          type="text"
+          class="folder-description"
+          placeholder="Add folder description here..."
+        />
+      </div>
+
+      <div class="line-seperator"></div>
+      <div class="folder-info-notes-container">
+        <p>Notes:</p>
+        <div class="folder-info-notes-grid">
+          <div class="note-container">
+            <div class="note-title">
+              <i class="bx bx-note"></i>${notes.name}
+            </div>
+            <i class="bx bxs-x-circle delete-button"></i>
+            <div class="note-img-mock">${notes.content}</div>
+
+            <div class="last-edit">Last edited ${notes.lastEdited}</div>
+          </div>
+          <div class="note-container">
+            <div class="note-title">
+              <i class="bx bx-note"></i>${notes.name}
+            </div>
+            <i class="bx bxs-x-circle delete-button"></i>
+            <div class="note-img-mock">${notes.content}</div>
+
+            <div class="last-edit">Last edited ${notes.lastEdited}</div>
+          </div>
+          <div class="note-container">
+            <div class="note-title">
+              <i class="bx bx-note"></i>${notes.name}
+            </div>
+            <i class="bx bxs-x-circle delete-button"></i>
+            <div class="note-img-mock">${notes.content}</div>
+
+            <div class="last-edit">Last edited ${notes.lastEdited}</div>
+          </div>
+          <div class="note-container">
+            <div class="note-title">
+              <i class="bx bx-note"></i>${notes.name}
+            </div>
+            <i class="bx bxs-x-circle delete-button"></i>
+            <div class="note-img-mock">${notes.content}</div>
+
+            <div class="last-edit">Last edited ${notes.lastEdited}</div>
+          </div>
+          <div class="note-container">
+            <div class="note-title">
+              <i class="bx bx-note"></i>${notes.name}
+            </div>
+            <i class="bx bxs-x-circle delete-button"></i>
+            <div class="note-img-mock">${notes.content}</div>
+
+            <div class="last-edit">Last edited ${notes.lastEdited}</div>
+          </div>
+          <div class="note-container">
+            <div class="note-title">
+              <i class="bx bx-note"></i>${notes.name}
+            </div>
+            <i class="bx bxs-x-circle delete-button"></i>
+            <div class="note-img-mock">${notes.content}</div>
+
+            <div class="last-edit">Last edited ${notes.lastEdited}</div>
+          </div>
+          <div class="note-container">
+            <div class="note-title">
+              <i class="bx bx-note"></i>${notes.name}
+            </div>
+            <i class="bx bxs-x-circle delete-button"></i>
+            <div class="note-img-mock">${notes.content}</div>
+
+            <div class="last-edit">Last edited ${notes.lastEdited}</div>
+          </div>
+          <div class="note-container">
+            <div class="note-title">
+              <i class="bx bx-note"></i>${notes.name}
+            </div>
+            <i class="bx bxs-x-circle delete-button"></i>
+            <div class="note-img-mock">${notes.content}</div>
+
+            <div class="last-edit">Last edited ${notes.lastEdited}</div>
+          </div>
         </div>
       </div>
     </div>
