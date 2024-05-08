@@ -64,12 +64,19 @@
       }
 
       .left-folder-info {
+        display: none;
+      }
+
+      .left-folder-info.active {
         position: fixed;
+        display: block;
         background-color: rgb(232, 232, 232);
         top: 0;
         right: 0;
-        width: 75vh;
+        width: 600px;
         height: 100%;
+        min-width: 200px;
+        transition: all 0.5s ease;
       }
       .folder-info-buttons {
         position: relative;
@@ -77,89 +84,126 @@
         top: 0;
         right: 0;
         height: 30px;
-        background-color: rgb(217, 217, 217);
       }
       .folder-info-data {
         position: relative;
 
-        height: 270px;
-        top: 0;
+        min-height: 270px;
+        height: calc(100% - 580px);
+        top: 50px;
         right: 0;
+        margin-bottom: 20px;
       }
 
       .folder-info-name {
         position: relative;
+
         border-bottom-width: 1px;
         border-bottom-color: black;
 
-        top: 3vh;
+        top: 0;
         right: 0;
         color: rgb(0, 0, 0);
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bold;
         font-size: 30px;
-        padding-left: 3vh;
+        padding-left: 27px;
         margin-bottom: 5px;
       }
       .date-created {
         position: relative;
         display: flex;
         align-items: center;
-        top: 3vh;
+        top: 27px;
         right: 0;
-        height: 3vh;
+        height: 27px;
 
         color: rgb(95, 95, 95);
 
-        padding-left: 3vh;
+        padding-left: 27px;
       }
       .unnamed-div1 {
         position: relative;
         display: flex;
         align-items: center;
 
-        top: 3vh;
+        top: 27px;
         right: 0;
-        height: 3vh;
+        height: 27px;
         color: rgb(95, 95, 95);
 
-        padding-left: 3vh;
+        padding-left: 27px;
       }
       .unnamed-div2 {
         position: relative;
         display: flex;
         align-items: center;
 
-        top: 3vh;
+        top: 27px;
         right: 0;
-        height: 3vh;
+        height: 27px;
         color: rgb(95, 95, 95);
 
-        padding-left: 3vh;
+        padding-left: 27px;
       }
       .folder-description {
         position: relative;
         background-color: rgb(245, 245, 245);
         border-radius: 10px;
         padding-top: 0;
-        padding-left: 3vh;
-        top: 6vh;
-        height: 8vh;
+        padding-left: 27px;
+        top: 54px;
+        height: 70px;
         width: 92.5%;
-        margin-left: 3vh;
+        margin-left: 27px;
+        min-width: 50px;
         border: none;
         outline: none;
       }
 
+      .folder-info-notes-container::-webkit-scrollbar {
+        background-color: transparent; /* Remove background */
+        width: 5px; /* Customize scrollbar width */
+      }
+
+      /* Track */
+      .folder-info-notes-container::-webkit-scrollbar-track {
+        background-color: transparent; /* Remove track background */
+      }
+
+      /* Handle */
+      .folder-info-notes-container::-webkit-scrollbar-thumb {
+        background-color: transparent; /* Customize scrollbar handle color */
+        border-radius: 5px; /* Round the scrollbar handle */
+      }
+
+      body::-webkit-scrollbar {
+        background-color: transparent; /* Remove background */
+        width: 5px; /* Customize scrollbar width */
+      }
+
+      /* Track */
+      body::-webkit-scrollbar-track {
+        background-color: rgb(217, 217, 217);
+      }
+
+      /* Handle */
+      body::-webkit-scrollbar-thumb {
+        background-color: #888; /* Customize scrollbar handle color */
+        border-radius: 5px; /* Round the scrollbar handle */
+      }
+
       .folder-info-notes-container {
+        position: relative;
         top: 0;
-        height: 100%;
+        height: 70%;
+        min-height: 100px;
         padding-bottom: 20px; /* Add padding to the bottom */
         overflow-y: auto;
       }
       .folder-info-notes-container p {
         color: rgb(80, 80, 80);
-        margin-left: 3vh;
+        margin-left: 27px;
         font-size: 20px;
         margin-bottom: 10px;
       }
@@ -172,7 +216,6 @@
         column-gap: 10px;
         row-gap: 10px;
         padding-bottom: 60%;
-        overflow: visible; /* Hide overflowing content */
       }
 
       .folder-info-notes-grid .note-container {
@@ -182,18 +225,44 @@
       .line-seperator {
         position: relative;
         background-color: rgb(193, 193, 193);
-        top: 0;
-        right: 3vh;
-        left: 3vh;
+        top: 20px;
+        right: 27px;
+        left: 27px;
         height: 1px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
+      }
+
+      .folder-info-buttons {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 10.8px;
+        padding-right: 10.8px;
+        cursor: pointer;
+        min-width: 200px;
+      }
+
+      .folder-info-buttons i {
+        font-size: 20px;
+        cursor: pointer;
+        margin-right: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 5px;
+      }
+
+      .folder-info-buttons i:hover {
+        background-color: rgba(128, 128, 128, 0.213);
       }
     </style>
   </head>
   <body>
     <div class="folder">
       <div class="folder-name">
-        <div class="folder-logo">
+        <div class="folder-logo js-folder-info-button">
           <i class="bx bx-folder"></i>
           <p>${folder.name}</p>
         </div>
@@ -232,8 +301,16 @@
       </div>
     </div>
 
-    <div class="left-folder-info">
-      <div class="folder-info-buttons"></div>
+    <div class="left-folder-info js-left-folder-info">
+      <div class="folder-info-buttons">
+        <div class="left-buttons">
+          <i class="bx bxs-chevrons-right js-close-sidebar-button"></i>
+          <i class="bx bx-expand-horizontal"></i>
+        </div>
+        <div class="right-buttons">
+          <i class="bx bx-star"></i> <i class="bx bx-dots-vertical-rounded"></i>
+        </div>
+      </div>
       <div class="folder-info-data">
         <div class="folder-info-name">
           <i class="bx bx-folder"></i>
@@ -338,6 +415,20 @@
       </div>
     </div>
 
-    <script></script>
+    <script>
+      let folderInfoButton = document.querySelector(".js-folder-info-button");
+      let leftFolderSidebar = document.querySelector(".js-left-folder-info");
+      let folderInfoCloseButton = document.querySelector(
+        ".js-close-sidebar-button"
+      );
+
+      folderInfoButton.onclick = function () {
+        leftFolderSidebar.classList.toggle("active");
+      };
+
+      folderInfoCloseButton.onclick = function () {
+        leftFolderSidebar.classList.toggle("active");
+      };
+    </script>
   </body>
 </html>

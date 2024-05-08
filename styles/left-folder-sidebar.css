@@ -1,0 +1,195 @@
+.left-folder-info {
+  display: none;
+}
+
+.left-folder-info.active {
+  position: fixed;
+  display: block;
+  background-color: rgb(232, 232, 232);
+  top: 0;
+  right: 0;
+  width: 600px;
+  height: 100%;
+  min-width: 200px;
+  transition: all 0.5s ease;
+  z-index: 100;
+}
+.folder-info-buttons {
+  position: relative;
+  display: flex;
+  top: 0;
+  right: 0;
+  height: 30px;
+}
+.folder-info-data {
+  position: relative;
+
+  min-height: 270px;
+  height: calc(100% - 580px);
+  top: 50px;
+  right: 0;
+  margin-bottom: 20px;
+}
+
+.folder-info-name {
+  position: relative;
+
+  border-bottom-width: 1px;
+  border-bottom-color: black;
+
+  top: 0;
+  right: 0;
+  color: rgb(0, 0, 0);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  padding-left: 27px;
+  margin-bottom: 5px;
+}
+.date-created {
+  position: relative;
+  display: flex;
+  align-items: center;
+  top: 27px;
+  right: 0;
+  height: 27px;
+
+  color: rgb(95, 95, 95);
+
+  padding-left: 27px;
+}
+.unnamed-div1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  top: 27px;
+  right: 0;
+  height: 27px;
+  color: rgb(95, 95, 95);
+
+  padding-left: 27px;
+}
+.unnamed-div2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  top: 27px;
+  right: 0;
+  height: 27px;
+  color: rgb(95, 95, 95);
+
+  padding-left: 27px;
+}
+.folder-description {
+  position: relative;
+  background-color: rgb(245, 245, 245);
+  border-radius: 10px;
+  padding-top: 0;
+  padding-left: 27px;
+  top: 54px;
+  height: 70px;
+  width: 92.5%;
+  margin-left: 27px;
+  min-width: 50px;
+  border: none;
+  outline: none;
+}
+
+.folder-info-notes-container::-webkit-scrollbar {
+  background-color: transparent; /* Remove background */
+  width: 5px; /* Customize scrollbar width */
+}
+
+/* Track */
+.folder-info-notes-container::-webkit-scrollbar-track {
+  background-color: transparent; /* Remove track background */
+}
+
+/* Handle */
+.folder-info-notes-container::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Customize scrollbar handle color */
+  border-radius: 5px; /* Round the scrollbar handle */
+}
+
+body::-webkit-scrollbar {
+  background-color: transparent; /* Remove background */
+  width: 5px; /* Customize scrollbar width */
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background-color: rgb(217, 217, 217);
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background-color: #888; /* Customize scrollbar handle color */
+  border-radius: 5px; /* Round the scrollbar handle */
+}
+
+.folder-info-notes-container {
+  position: relative;
+  top: 0;
+  height: 70%;
+  min-height: 100px;
+  padding-bottom: 20px; /* Add padding to the bottom */
+  overflow-y: auto;
+}
+.folder-info-notes-container p {
+  color: rgb(80, 80, 80);
+  margin-left: 27px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.folder-info-notes-grid {
+  align-items: flex-start; /* Align items at the start of the container */
+  padding: 10px; /* Add padding to prevent containers from sticking to the edges */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding-bottom: 60%;
+}
+
+.folder-info-notes-grid .note-container {
+  min-height: 100px;
+  overflow: visible;
+}
+.line-seperator {
+  position: relative;
+  background-color: rgb(193, 193, 193);
+  top: 20px;
+  right: 27px;
+  left: 27px;
+  height: 1px;
+  margin-bottom: 40px;
+}
+
+.folder-info-buttons {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10.8px;
+  padding-right: 10.8px;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.folder-info-buttons i {
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+}
+
+.folder-info-buttons i:hover {
+  background-color: rgba(128, 128, 128, 0.213);
+}

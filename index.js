@@ -136,6 +136,22 @@ export function renderFolderHTML() {
 
   attachDeleteButtonListeners();
   attachCreateNewNoteButtonListeners();
+
+  let folderInfoButton = document.querySelector(".js-folder-info-button");
+
+  let leftFolderSidebar = document.querySelector(".js-left-folder-info");
+
+  let folderInfoCloseButton = document.querySelector(
+    ".js-close-sidebar-button"
+  );
+
+  folderInfoButton.onclick = function () {
+    leftFolderSidebar.classList.toggle("active");
+  };
+
+  folderInfoCloseButton.onclick = function () {
+    leftFolderSidebar.classList.toggle("active");
+  };
 }
 
 //Delete button
