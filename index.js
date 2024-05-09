@@ -86,6 +86,38 @@ export function renderFolderHTML() {
     document.querySelector(".notes").innerHTML = foldersHTML;
   });
 
+  let leftSidebarOpen = false;
+  let folderOpened = "";
+
+  document.querySelectorAll(".js-folder-info-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const folderId = button.dataset.folderId;
+      if (!leftSidebarOpen) {
+        leftFolderSidebar.classList.toggle("active");
+        folderOpened = folderId;
+        leftSidebarOpen = true;
+        renderFolderInfoHTML(folderId);
+      } else if (leftSidebarOpen && folderOpened === folderId) {
+        leftFolderSidebar.classList.toggle("active");
+        leftSidebarOpen = false;
+        folderOpened = "";
+      } else if (leftSidebarOpen && folderOpened !== folderId) {
+        renderFolderInfoHTML(folderId);
+        folderOpened = folderId;
+      }
+    });
+  });
+
+  let leftFolderSidebar = document.querySelector(".js-left-folder-info");
+
+  let folderInfoCloseButton = document.querySelector(
+    ".js-close-sidebar-button"
+  );
+
+  folderInfoCloseButton.onclick = function () {
+    leftFolderSidebar.classList.toggle("active");
+    leftSidebarOpen = false;
+  };
   //Folder Buttons
   const folderDropDownButton = document.querySelectorAll(
     ".js-folder-dropdown-button"
@@ -127,33 +159,70 @@ export function renderFolderHTML() {
   });
 
   //Folder info button
-  document.querySelectorAll(".js-folder-info-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      const folderId = button.dataset.folderId;
-      console.log(folderId);
-    });
-  });
-
+  renderFolderInfoHTML();
   attachDeleteButtonListeners();
-  attachCreateNewNoteButtonListeners(); //yers
-
-  let folderInfoButton = document.querySelector(".js-folder-info-button");
-
-  let leftFolderSidebar = document.querySelector(".js-left-folder-info");
-
-  let folderInfoCloseButton = document.querySelector(
-    ".js-close-sidebar-button"
-  );
-
-  folderInfoButton.onclick = function () {
-    leftFolderSidebar.classList.toggle("active");
-  };
-
-  folderInfoCloseButton.onclick = function () {
-    leftFolderSidebar.classList.toggle("active");
-  };
+  attachCreateNewNoteButtonListeners();
 }
 
+function renderFolderInfoHTML(folderId = folders.folderData[0].id) {
+  let foldersInfoHTML = ``;
+  let folderNotesHTML = ``;
+  let matchingFolder;
+  folders.folderData.forEach((folder) => {
+    if (folder.id === folderId) {
+      matchingFolder = folder;
+    }
+  });
+
+  matchingFolder.notes.forEach((notes) => {
+    folderNotesHTML += `
+    <div class="note-container">
+    <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
+    <i class="bx bxs-x-circle delete-button js-delete-button" data-note-id = "${notes.id}" data-folder-id = "${matchingFolder.id}"></i>
+    <div class="note-img-mock">
+      ${notes.content}
+    </div>
+  
+    <div class="last-edit">Last edited ${notes.lastEdited}</div>
+  </div>
+    `;
+  });
+
+  foldersInfoHTML = `<div class="folder-info-data">
+  <div class="folder-info-name">
+    <i class="bx bx-folder"></i>
+    ${matchingFolder.name}
+  </div>
+  <div class="date-created">
+    <i class="bx bx-calendar"></i>
+    Date Created: May 7th 2024
+  </div>
+  <div class="unnamed-div1">
+    <i class="bx bx-notepad"></i>
+    Note Count: ${matchingFolder.notes.length}
+  </div>
+  <div class="unnamed-div2">
+    <i class="bx bx-purchase-tag-alt"></i>
+    Tags
+  </div>
+  <input
+    type="text"
+    class="folder-description"
+    placeholder="Add folder description here..."
+  />
+  <!-- end of folderInfoData -->
+</div>
+
+<div class="line-seperator"></div>
+<div class="folder-info-notes-container">
+  <p>Notes:</p>
+  <div class="folder-info-notes-grid">
+    ${folderNotesHTML}
+  </div>
+</div>`;
+
+  document.querySelector(".js-data-container").innerHTML = foldersInfoHTML;
+}
 //Delete button
 function attachDeleteButtonListeners() {
   const deleteButtons = document.querySelectorAll(".js-delete-button");
@@ -262,35 +331,3 @@ document.querySelector(".js-create-folder").addEventListener("click", () => {
 });
 
 renderFolderHTML();
-
-/*
-// Check if the ID is already stored in local storage
-let id = localStorage.getItem("generatedId");
-
-// If the ID is not stored, generate it and save it in local storage
-if (!id) {
-  id = `id${Date.now()}`; // Generate the current time in milliseconds
-  localStorage.setItem("generatedId", id); // Save the ID in local storage
-}
-
-// Use the ID variable as needed
-console.log("Generated ID:", id);
-console.log(id);
-console.log(`id${Date.now()}`);
-
-folders[0].notes.forEach((note, index) => {
-  if (note.id === "id1") {
-    console.log("found Id1");
-    console.log(index);
-  } else if (note.id === "id2") {
-    console.log("foundId2");
-    console.log(index);
-  } else if (note.id !== "id3") {
-  }
-});
-
-*/
-
-//Diff
-//second diff
-// new
