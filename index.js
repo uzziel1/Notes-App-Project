@@ -135,7 +135,7 @@ export function renderFolderHTML() {
   });
 
   attachDeleteButtonListeners();
-  attachCreateNewNoteButtonListeners();
+  attachCreateNewNoteButtonListeners(); //yers
 
   let folderInfoButton = document.querySelector(".js-folder-info-button");
 
