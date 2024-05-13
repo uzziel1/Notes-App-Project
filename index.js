@@ -18,6 +18,7 @@ updateClock();
 const clockIntervalId = setInterval(updateClock, 1000);
 
 //START OF BUTTON FUNCTIONALITY
+//
 let btn = document.querySelector("#btn");
 let header = document.querySelector(".header");
 let sidebar = document.querySelector(".sidebar");
