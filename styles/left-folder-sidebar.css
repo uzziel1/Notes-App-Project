@@ -152,6 +152,11 @@ body::-webkit-scrollbar-thumb {
   column-gap: 10px;
   row-gap: 10px;
   padding-bottom: 60%;
+  margin-bottom: 30px;
+  height: calc(
+    100vh - 200px
+  ); /* 100vh is the full height of the viewport, adjust the subtraction value as needed */
+  overflow-y: auto;
 }
 
 .folder-info-notes-grid .note-container {
@@ -163,6 +168,17 @@ body::-webkit-scrollbar-thumb {
   background-color: rgb(193, 193, 193);
   top: 20px;
   right: 27px;
+  .folder-info-notes-grid {
+    align-items: flex-start; /* Align items at the start of the container */
+    padding: 10px; /* Add padding to prevent containers from sticking to the edges */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+    padding-bottom: 60%;
+    margin-bottom: 30px;
+    overflow-y: auto; /* Change this to 'scroll' if you want to always show the scrollbar */
+  }
   left: 27px;
   height: 1px;
   margin-bottom: 40px;
