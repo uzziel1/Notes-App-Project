@@ -4,6 +4,12 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 //Renders Folders HTML
 const hiddenFolders = [];
 const addedMessageTimeouts = {};
+
+//Right Folder Sidebar Variables
+let rightFolderSidebar = document.querySelector('.js-right-folder-info');
+let rightSidebarOpen = false;
+let folderOpened = '';
+
 export function renderFolderHTML() {
   let foldersHTML = '';
 
@@ -57,38 +63,37 @@ export function renderFolderHTML() {
     document.querySelector('.notes').innerHTML = foldersHTML;
   });
 
-  let leftSidebarOpen = false;
-  let folderOpened = '';
-
   document.querySelectorAll('.js-folder-info-button').forEach((button) => {
     button.addEventListener('click', () => {
       const folderId = button.dataset.folderId;
-      if (!leftSidebarOpen) {
-        leftFolderSidebar.classList.toggle('active');
-        folderOpened = folderId;
-        leftSidebarOpen = true;
-        renderFolderInfoHTML(folderId);
-      } else if (leftSidebarOpen && folderOpened === folderId) {
-        leftFolderSidebar.classList.toggle('active');
-        leftSidebarOpen = false;
-        folderOpened = '';
-      } else if (leftSidebarOpen && folderOpened !== folderId) {
-        renderFolderInfoHTML(folderId);
-        folderOpened = folderId;
+      if (!rightSidebarOpen) {
+        //If the right sidebar is not open
+        rightFolderSidebar.classList.toggle('active'); //Toggle the right sidebar
+        folderOpened = folderId; //Set the folder opened to the folder id
+        rightSidebarOpen = true; //Declare that the right sidebar is open
+        renderFolderInfoHTML(folderId); //Render the folder info
+      } else if (rightSidebarOpen && folderOpened === folderId) {
+        //If the right sidebar is open and the folder opened is the same as the folder id
+        rightFolderSidebar.classList.toggle('active'); //Toggle the right sidebar off
+        rightSidebarOpen = false; //Declare that the right sidebar is closed
+        folderOpened = ''; //Set the folder opened to an empty string because the sidebar is closed
+      } else if (rightSidebarOpen && folderOpened !== folderId) {
+        //If the right sidebar is open and the folder opened is not the same as the folder id
+        renderFolderInfoHTML(folderId); //Render the folder info
+        folderOpened = folderId; //Set the folder opened to the folder id
       }
     });
   });
-
-  let leftFolderSidebar = document.querySelector('.js-left-folder-info');
 
   let folderInfoCloseButton = document.querySelector(
     '.js-close-sidebar-button'
   );
 
   folderInfoCloseButton.onclick = function () {
-    leftFolderSidebar.classList.toggle('active');
-    leftSidebarOpen = false;
+    rightFolderSidebar.classList.toggle('active');
+    rightSidebarOpen = false;
   };
+
   //Folder Buttons
   const folderDropDownButton = document.querySelectorAll(
     '.js-folder-dropdown-button'
@@ -130,7 +135,7 @@ export function renderFolderHTML() {
   });
 
   //Folder info button
-  renderFolderInfoHTML();
+  renderFolderInfoHTML(folderOpened);
   attachDeleteButtonListeners();
   attachCreateNewNoteButtonListeners();
 }
