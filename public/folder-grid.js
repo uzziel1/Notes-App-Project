@@ -1,4 +1,4 @@
-import { folders } from '../data/folder.js';
+import { folders } from './data/folder.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 //Renders Folders HTML
@@ -8,7 +8,7 @@ const addedMessageTimeouts = {};
 //Right Folder Sidebar Variables
 let rightFolderSidebar = document.querySelector('.js-right-folder-info');
 let rightSidebarOpen = false;
-let folderOpened = '';
+let folderOpened = folders.folderData[0].id;
 
 export function renderFolderHTML() {
   let foldersHTML = '';
