@@ -1,9 +1,13 @@
-import { folders } from './data/folder.js';
+import { folders } from '../data/folder.js';
+import { attachDeleteButtonListeners } from './delete-note.js';
+import {
+  attachCreateNewNoteButtonListeners,
+  updateAddedNote,
+} from './create-note.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 //Renders Folders HTML
 const hiddenFolders = [];
-const addedMessageTimeouts = {};
 
 //Right Folder Sidebar Variables
 let rightFolderSidebar = document.querySelector('.js-right-folder-info');
@@ -16,16 +20,16 @@ export function renderFolderHTML() {
   folders.folderData.forEach((folder) => {
     let notesHTML = '';
 
-    folder.notes.forEach((notes) => {
+    folder.notes.forEach((note) => {
       notesHTML += `
       <div class="note-container">
-      <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
-      <i class="bx bxs-x-circle delete-button js-delete-button" data-note-id = "${notes.id}" data-folder-id = "${folder.id}"></i>
+      <div class="note-title"><i class="bx bx-note"></i>${note.name}</div>
+      <i class="bx bxs-x-circle delete-button js-delete-button" data-note-id = "${note.id}" data-folder-id = "${folder.id}"></i>
       <div class="note-img-mock">
-        ${notes.content}
+        ${note.content}
       </div>
     
-      <div class="last-edit">Last edited ${notes.lastEdited}</div>
+      <div class="last-edit">Last edited ${note.lastEdited}</div>
     </div>
       `;
     });
@@ -122,7 +126,6 @@ export function renderFolderHTML() {
         const index = hiddenFolders.indexOf(folderId);
 
         hiddenFolders.splice(index, 1);
-        console.log('succesful');
       }
     });
   });
@@ -135,7 +138,10 @@ export function renderFolderHTML() {
   });
 
   //Folder info button
-  renderFolderInfoHTML(folderOpened);
+  if (folderOpened) {
+    renderFolderInfoHTML(folderOpened);
+  }
+
   attachDeleteButtonListeners();
   attachCreateNewNoteButtonListeners();
 }
@@ -200,89 +206,14 @@ function renderFolderInfoHTML(folderId = folders.folderData[0].id) {
   document.querySelector('.js-data-container').innerHTML = foldersInfoHTML;
 }
 
-//Delete button
-function attachDeleteButtonListeners() {
-  const deleteButtons = document.querySelectorAll('.js-delete-button');
-  deleteButtons.forEach((button) => {
-    button.removeEventListener('click', handleDeleteButtonClick);
-    button.addEventListener('click', handleDeleteButtonClick);
-  });
-}
-
-function handleDeleteButtonClick(event) {
-  const button = event.target;
-  const folderId = button.dataset.folderId;
-  const noteId = button.dataset.noteId;
-
-  folders.deleteNoteFromFolder(folderId, noteId);
-  renderFolderHTML();
-}
-
 // Attach event listeners when the DOM is ready
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   attachDeleteButtonListeners();
 });
-function attachCreateNewNoteButtonListeners() {
-  const openModals = document.querySelectorAll('.js-folder-add-note');
-  openModals.forEach((button) => {
-    button.addEventListener('click', handleNewNoteButtonClick);
-  });
-}
-
-function handleNewNoteButtonClick(event) {
-  const button = event.target;
-  const folderId = button.dataset.folderId;
-  const form = document.querySelector('.form');
-  const modal = document.querySelector('.create-new-note');
-
-  // Clear the noteTitle input field
-  document.querySelector('.js-note-title').value = '';
-
-  modal.showModal();
-
-  const handleFormSubmit = () => {
-    let noteTitle = document.querySelector('.js-note-title').value;
-    folders.addNoteToFolder(
-      {
-        id: `id${Date.now()}`,
-        name: noteTitle,
-        content: '',
-        lastEdited: `${dayjs().format('MMMM D, YYYY')}`,
-      },
-      folderId
-    );
-
-    renderFolderHTML();
-    updateAddedNote(folderId);
-    noteTitle = '';
-    form.removeEventListener('submit', handleFormSubmit);
-  };
-
-  form.addEventListener('submit', handleFormSubmit);
-}
 
 document.addEventListener('DOMContentLoaded', function () {
   attachCreateNewNoteButtonListeners();
 });
-
-function updateAddedNote(folderId) {
-  document
-    .querySelector(`.js-note-added-${folderId}`)
-    .classList.add('note-is-visible');
-
-  const previousTimeoutId = addedMessageTimeouts[folderId];
-  if (previousTimeoutId) {
-    clearTimeout(previousTimeoutId);
-  }
-
-  const timeoutId = setTimeout(() => {
-    document
-      .querySelector(`.js-note-added-${folderId}`)
-      .classList.remove('note-is-visible');
-  }, 1500);
-
-  addedMessageTimeouts[folderId] = timeoutId;
-}
 
 //END OF BUTTON FUNCTIONALLITY ^^^^
 

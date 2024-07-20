@@ -1,7 +1,7 @@
 // import { notes } from "./data/note.js";
 import { folders } from './data/folder.js';
-import { updateClock } from './clock.js';
-import { renderFolderHTML } from './folder-grid.js';
+import { updateClock } from './utils/clock.js';
+import { renderFolderHTML } from './folder-grid/folder-grid.js';
 
 //Updating Clock Element
 const clockIntervalId = setInterval(updateClock, 1000);
