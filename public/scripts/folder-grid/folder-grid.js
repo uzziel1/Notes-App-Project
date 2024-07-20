@@ -1,4 +1,4 @@
-import { folders } from '../data/folder.js';
+import { folders } from '../../data/folder.js';
 import { attachDeleteButtonListeners } from './delete-note.js';
 import {
   attachCreateNewNoteButtonListeners,

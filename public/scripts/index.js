@@ -1,5 +1,5 @@
 // import { notes } from "./data/note.js";
-import { folders } from './data/folder.js';
+import { folders } from '../data/folder.js';
 import { updateClock } from './utils/clock.js';
 import { renderFolderHTML } from './folder-grid/folder-grid.js';
 
