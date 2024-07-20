@@ -209,9 +209,6 @@
 .create-new-note {
   z-index: 100;
 }
-body {
-  margin-bottom: 1000px;
-}
 
 .create-new-note {
   margin: auto;
