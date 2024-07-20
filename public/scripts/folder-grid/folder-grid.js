@@ -22,7 +22,7 @@ export function renderFolderHTML() {
 
     folder.notes.forEach((note) => {
       notesHTML += `
-      <div class="note-container">
+      <a class="note-container" onclick = "location.href = 'note-editor.html?noteId=${note.id}&folderId=${folder.id}'">
       <div class="note-title"><i class="bx bx-note"></i>${note.name}</div>
       <i class="bx bxs-x-circle delete-button js-delete-button" data-note-id = "${note.id}" data-folder-id = "${folder.id}"></i>
       <div class="note-img-mock">
@@ -30,7 +30,7 @@ export function renderFolderHTML() {
       </div>
     
       <div class="last-edit">Last edited ${note.lastEdited}</div>
-    </div>
+    </a>
       `;
     });
 
@@ -158,7 +158,7 @@ function renderFolderInfoHTML(folderId = folders.folderData[0].id) {
 
   matchingFolder.notes.forEach((notes) => {
     folderNotesHTML += `
-    <div class="note-container">
+    <div class="note-container" onclick="location.href='note-editor.html?noteId=${notes.id}&folderId=${matchingFolder.id}'">
     <div class="note-title"><i class="bx bx-note"></i>${notes.name}</div>
     <i class="bx bxs-x-circle delete-button js-delete-button" data-note-id = "${notes.id}" data-folder-id = "${matchingFolder.id}"></i>
     <div class="note-img-mock">

@@ -1,5 +1,5 @@
 // Folder.js
-import Note from "./note-class.js";
+import Note from './note-class.js';
 
 /* 
 class Folder {
@@ -86,32 +86,32 @@ class Folder {
     if (!this.folderData) {
       this.folderData = [
         {
-          name: "Default Folder1",
-          id: "DefaultFolderId1",
+          name: 'Default Folder1',
+          id: 'DefaultFolderId1',
           notes: [
             {
-              id: "DefaultNoteId1",
-              name: "My first note in Folder 1",
-              content: "Content of first note in Folder 1",
-              lastEdited: "April 15, 2024",
+              id: 'DefaultNoteId1',
+              name: 'My first note in Folder 1',
+              content: 'Content of first note in Folder 1',
+              lastEdited: 'April 15, 2024',
             },
             {
-              id: "DefaultNoteId2",
-              name: "My second note in Folder 1",
-              content: "Content of second note in Folder 1",
-              lastEdited: "April 27, 2024",
+              id: 'DefaultNoteId2',
+              name: 'My second note in Folder 1',
+              content: 'Content of second note in Folder 1',
+              lastEdited: 'April 27, 2024',
             },
           ],
         },
         {
-          name: "Default Folder 2",
-          id: "DefaultFolderId2",
+          name: 'Default Folder 2',
+          id: 'DefaultFolderId2',
           notes: [
             {
-              id: "DefaultNoteId3",
-              name: "My first note in Folder 2",
-              content: "Content of first note in Folder 2",
-              lastEdited: "April 11, 2024",
+              id: 'DefaultNoteId3',
+              name: 'My first note in Folder 2',
+              content: 'Content of first note in Folder 2',
+              lastEdited: 'April 11, 2024',
             },
           ],
         },
@@ -170,7 +170,7 @@ class Folder {
     if (matchingNoteIndex !== -1) {
       matchingFolder.notes.splice(matchingNoteIndex, 1);
     } else {
-      console.error("Note not found in folder:", noteId);
+      console.error('Note not found in folder:', noteId);
     }
 
     this.saveToStorage();
@@ -185,5 +185,23 @@ class Folder {
 
     this.saveToStorage();
   }
+
+  getNote(folderId, noteId) {
+    let matchingFolder;
+    this.folderData.forEach((folder) => {
+      if (folder.id === folderId) {
+        matchingFolder = folder;
+      } else {
+        console.log('not found');
+      }
+    });
+    let matchingNote;
+    matchingFolder.notes.forEach((note) => {
+      if (note.id === noteId) {
+        matchingNote = note;
+      }
+    });
+    return matchingNote;
+  }
 }
-export const folders = new Folder("main-folders");
+export const folders = new Folder('main-folders');
