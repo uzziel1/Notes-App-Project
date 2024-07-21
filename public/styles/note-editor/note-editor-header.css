@@ -1,0 +1,45 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f3f3f4;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.5s ease;
+  z-index: 35;
+  box-shadow: 3.2px 1px 3px 2px rgba(0, 0, 0, 0.074);
+}
+
+.header.active {
+  left: 250px;
+}
+.utlity-buttons {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.header-button {
+  margin-right: 30px;
+  transition: all 0.4s ease-in-out;
+  font-size: 17px;
+}
+
+.line {
+  background-color: transparent;
+  height: 2px;
+  margin-top: 2px;
+  transition: background-color 0.15s;
+}
+
+.header-button:hover .line {
+  background-color: rgb(80, 80, 80);
+}
+
+.bx-menu {
+  font-size: 23px;
+  margin-left: 20px;
+}
