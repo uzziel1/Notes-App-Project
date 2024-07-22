@@ -282,13 +282,14 @@
 }
 .delete-button {
   position: absolute;
-  right: 2vh;
-  top: 1.5vh;
+  right: 15px;
+  top: 13.5px;
 
   color: rgb(45, 45, 45);
   display: none;
   font-size: 18px;
   transition: color 0.15s, font-size 0.15s;
+  z-index: 200;
 }
 
 .note-container:hover .delete-button {

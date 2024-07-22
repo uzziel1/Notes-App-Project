@@ -22,15 +22,17 @@ export function renderFolderHTML() {
 
     folder.notes.forEach((note) => {
       notesHTML += `
-      <a class="note-container" onclick = "location.href = 'note-editor.html?noteId=${note.id}&folderId=${folder.id}'">
-      <div class="note-title"><i class="bx bx-note"></i>${note.name}</div>
-      <i class="bx bxs-x-circle delete-button js-delete-button" data-note-id = "${note.id}" data-folder-id = "${folder.id}"></i>
-      <div class="note-img-mock">
-        ${note.content}
-      </div>
-    
-      <div class="last-edit">Last edited ${note.lastEdited}</div>
-    </a>
+     
+     <div class="note-container">
+  <i class="bx bxs-x-circle delete-button js-delete-button" data-note-id="${note.id}" data-folder-id="${folder.id}"></i>
+  <div  class = "note-send"onclick="location.href = 'note-editor.html?noteId=${note.id}&folderId=${folder.id}'">
+    <div class="note-title"><i class="bx bx-note"></i>${note.name}</div>
+    <div class="note-img-mock">
+      ${note.content}
+    </div>
+  </div>
+  <div class="last-edit">Last edited ${note.lastEdited}</div>
+</div>
       `;
     });
 

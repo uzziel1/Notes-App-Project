@@ -1,3 +1,6 @@
+import { folders } from '../../data/folder.js';
+import { renderFolderHTML } from './folder-grid.js';
+
 //Delete button
 export function attachDeleteButtonListeners() {
   const deleteButtons = document.querySelectorAll('.js-delete-button');
