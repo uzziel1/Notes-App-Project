@@ -92,13 +92,17 @@
 
 .note-container {
   position: relative;
-  background-color: rgb(244, 244, 244);
+  background-color: rgb(252, 252, 252);
   height: 250px;
   width: 100%;
   min-width: 250px;
   border-radius: 15px;
   transition: background-color 0.15s ease;
   cursor: pointer;
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.09);
+  box-shadow: 2px 2px 3px #0000000f;
 }
 
 .note-img-mock {
@@ -155,7 +159,7 @@
 
 .last-edit {
   position: absolute;
-  background-color: rgb(244, 244, 244);
+  background-color: rgb(252, 252, 252);
   color: rgb(97, 97, 97);
   height: 40px;
   bottom: 0;

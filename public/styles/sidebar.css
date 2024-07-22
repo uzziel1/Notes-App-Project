@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .user-img {
@@ -18,7 +18,7 @@
   height: 100vh;
   min-height: 740px;
   width: 80px;
-  background-color: #f3f3f4;
+  background-color: #f7f7f7;
   padding: 0.4rem 0.8rem;
   transition: all 0.5s ease;
   z-index: 35;
@@ -35,7 +35,7 @@
   transition: all 0.5s ease;
   z-index: 35;
   pointer-events: none;
-  box-shadow: 1px 3.1px 2.2px 2px rgba(0, 0, 0, 0.074);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.074);
 }
 
 .sidebar.active + .main-content {

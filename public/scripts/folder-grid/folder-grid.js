@@ -21,6 +21,7 @@ export function renderFolderHTML() {
     let notesHTML = '';
 
     folder.notes.forEach((note) => {
+      //REMEMBER TO ADD ${note.content} BACK INTO IMG MOCK
       notesHTML += `
      
      <div class="note-container">
@@ -28,7 +29,7 @@ export function renderFolderHTML() {
   <div  class = "note-send"onclick="location.href = 'note-editor.html?noteId=${note.id}&folderId=${folder.id}'">
     <div class="note-title"><i class="bx bx-note"></i>${note.name}</div>
     <div class="note-img-mock">
-      ${note.content}
+    ${note.content}
     </div>
   </div>
   <div class="last-edit">Last edited ${note.lastEdited}</div>
