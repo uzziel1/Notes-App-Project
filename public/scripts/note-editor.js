@@ -7,7 +7,13 @@ const { noteId, folderId } = {
 };
 
 const note = folders.getNote(folderId, noteId);
+console.log(note);
+const { content, id, lastEdited, name } = note;
 
+document.querySelector('.js-title').innerHTML = name || 'N/A';
+document.querySelector('.js-last-edited').innerHTML = lastEdited || 'N/A';
+
+//Note editor JS
 let optionsButtons = document.querySelectorAll('.option-button');
 let advancedOptionButton = document.querySelectorAll('.adv-option-button');
 let fontName = document.getElementById('fontName');
